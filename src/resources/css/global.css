@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.content-site {
+    display: flex;
+    flex-direction: row;
+}
+
+main{
+    margin: 10px;
+}
+
+table {
+    margin: 10px;
+    border-collapse: collapse;
+
+}
+
+td, th {
+    padding: 3px;
+    border: 1px solid darkgrey;
+}
+
+th {
+    background-color: lightgrey;
+    color: #999;
+}

@@ -1,0 +1,85 @@
+#tree-menu {
+    padding: 0 0 0 10px;
+    width: 300px;
+}
+
+#tree-menu li {
+    position: relative;
+    margin-left: -15px;
+    list-style: none;
+}
+
+
+#tree-menu li label {
+    cursor: pointer;
+    display: block;
+    padding-left: 14px;
+}
+
+#tree-menu li.last-category {
+    margin-left: -1px !important;
+}
+
+#tree-menu li.last-category a {
+
+    padding-left: 1px;
+    text-decoration: none;
+    display: block;
+}
+
+#tree-menu li input {
+    position: absolute;
+    left: 0;
+    margin-left: 0;
+    opacity: 0;
+    z-index: 2;
+    cursor: pointer;
+    height: 1em;
+    width: 1em;
+    top: 0;
+}
+
+#tree-menu li input + ol {
+    background: url(../img/toggle-small-expand.png) 40px 0 no-repeat;
+    margin: -0.938em 0 0 -44px; /* 15px */
+    height: 1em;
+    display: block;
+}
+
+#tree-menu li input + ol > li {
+    display: none;
+    margin-left: -14px !important;
+    padding-left: 1px;
+}
+
+#tree-menu li input:checked + ol {
+    background: url(../img/toggle-small.png) 40px 5px no-repeat;
+    margin: -1.25em 0 0 -44px;
+    padding: 1.563em 0 0 80px;
+    height: auto;
+
+}
+
+#tree-menu li input:checked + ol > li {
+    display: block;
+    margin: 0 0 0.125em;
+}
+
+#tree-menu li input:checked + ol > li:last-child {
+    margin: 0 0 0.063em;
+}
+
+#tree-menu a{
+    color:#111;
+    text-decoration:none;
+}
+
+#tree-menu:hover a{
+    color:#111;
+}
+
+#tree-menu:active a{
+    color:#111;
+
+
+}
