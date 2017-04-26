@@ -1,54 +1,40 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import {Link} from 'react-router-dom';
 
-class Category extends Component {
-    state = {
-        category: {
-            attributties:[]
-        }
+export default function Category({category, error}) {
+    if (error) {
+        return <div>{error} </div>
     }
-
-    componentDidMount() {
-        this.getCategories();
-    }
-
-    getCategories() {
-        return axios.get(`http://localhost:8080/categories/${this.props.match.params.id}`).then(res => {
-            this.setState({category: res.data});
-        }).catch((error) => {
-            console.error(error);
-        });
-    }
-
-
-    render() {
-        const attrs = this.state.category.attributties.map(item => {
-            return (<tr>
+    if (!category)
+        return <div><p>Loading...</p></div>
+    else {
+        const attrs = category.attributties.map(item => {
+            return (<tr key={item.id}>
                 <td>{item.name}</td>
                 <td>{item.type}</td>
             </tr>)
         });
         return (
             < div >
-                {this.props.match.params.id}
                 <table>
+                    <tbody>
                     <tr>
                         <th>Название категории</th>
-                        <td>{this.state.category.name}</td>
+                        <td>{category.name}</td>
                     </tr>
+                    </tbody>
                 </table>
                 <h2>Атрибуты</h2>
                 <table>
+                    <tbody>
                     <tr>
                         <th>Название атрибута</th>
                         <th>Тип</th>
                     </tr>
                     {attrs}
+                    </tbody>
                 </table>
             </div>
         )
     }
 }
-
-export default Category;

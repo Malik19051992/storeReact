@@ -10,7 +10,11 @@ class Navigation extends Component {
                     <li><Link to='/'>Администрирование</Link>
                         <ul>
                             <li><Link to='/attributties'>Атрибуты</Link></li>
-                            <li><Link to='/categories/'>Категории</Link></li>
+                            <li><Link to='/categories/'>Категории</Link>
+                                <ul>
+                                    <li><Link to='/newCategory/'>Добавить категорию</Link></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                     <li><Link to='/'>Регистрация</Link></li>
