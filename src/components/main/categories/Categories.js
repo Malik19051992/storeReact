@@ -17,7 +17,7 @@ export default function Categories({categories, error}) {
         });
         return (
             <div>
-                <table>
+                <table className="data-table">
                     <tbody>
                     <tr>
                         <th>Название категории</th>
@@ -26,10 +26,9 @@ export default function Categories({categories, error}) {
                     {rows}
                     </tbody>
                 </table>
-                <button><Link to="/newCategory/">Добавить категорию</Link></button>
+                <button><Link to="/createCategory/">Добавить категорию</Link></button>
             </div>
         )
     }
-
 }
 

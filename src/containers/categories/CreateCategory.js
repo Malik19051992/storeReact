@@ -1,16 +1,24 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import NewCategory from '../../components/main/categories/CreateCategory'
+import CreateCategory from '../../components/main/categories/CreateCategory'
 import {getCategories, addCategory} from '../../redux/modules/categories'
 
-class newCategoryContainer extends Component {
+class CreateCategoryContainer extends Component {
+
+    componentDidUpdate(prevProps) {
+        this.fetchData();
+    }
 
     componentDidMount() {
+        this.fetchData();
+    }
+
+    fetchData() {
         this.props.getCategories();
     }
 
     render() {
-        return <NewCategory {...this.props} addCategory={getCallback(this.props.addCategory)}/>
+        return <CreateCategory {...this.props} addCategory={this.props.addCategory}/>
     }
 }
 
@@ -19,17 +27,9 @@ const mapStateToProps = state => ({
     error: state.categoriesData.error
 })
 
-const mapDispatchToProps = {
+const mapDispatchToProps = dispatch => ({
     getCategories,
-    addCategory
-}
+    addCategory: (data) => dispatch(addCategory(data))
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(newCategoryContainer);
-
-function getCallback(addCategory ) {
-    return function (category) {
-        addCategory(category);
-    }
-
-}
-
+export default connect(mapStateToProps, mapDispatchToProps)(CreateCategoryContainer);

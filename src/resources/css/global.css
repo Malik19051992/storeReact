@@ -9,22 +9,36 @@ body {
     flex-direction: row;
 }
 
-main{
+main {
     margin: 10px;
 }
 
-table {
+table.data-table {
     margin: 10px;
     border-collapse: collapse;
 
 }
 
-td, th {
+table.data-table td, table.data-table th {
     padding: 3px;
     border: 1px solid darkgrey;
 }
 
-th {
+table.data-table th {
     background-color: lightgrey;
-    color: #999;
+    color: black;
 }
+
+table.data-table a{
+    color:#111;
+    text-decoration:none;
+}
+
+table.data-table a:hover{
+    color:blue;
+}
+
+table.data-table:active a{
+    color:#111;
+}
+

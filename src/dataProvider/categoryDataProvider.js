@@ -21,3 +21,18 @@ export function addCategoryData(category) {
     return axios.post(host+`categories/`, JSON.stringify(category))
         .then(res => res.data);
 }
+
+export function getAttributtiesData() {
+    return axios.get(host+'attributties/')
+        .then(res => res.data);
+}
+
+export function getAttributeByIdData(id) {
+    return axios.get(host+`attributties/${id}`)
+        .then(res => res.data);
+}
+
+export function addAttributeData(attribute) {
+    return axios.post(host+`attributties/`, JSON.stringify(attribute))
+        .then(res => res.data);
+}

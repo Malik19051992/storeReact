@@ -1,7 +1,8 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux'
+import {createStore, applyMiddleware, combineReducers} from 'redux'
 import thunk from 'redux-thunk';
 import categories from './modules/categories'
-import { createLogger } from 'redux-logger'
+import attributties from './modules/attributties'
+import {createLogger} from 'redux-logger'
 
 const loggerMiddleware = createLogger()
 const createStoreWithMiddleware = applyMiddleware(
@@ -10,7 +11,8 @@ const createStoreWithMiddleware = applyMiddleware(
 )(createStore)
 
 const reducer = combineReducers({
-    categoriesData: categories
+    categoriesData: categories,
+    attributtiesData: attributties
 })
 
 export default initialState => createStoreWithMiddleware(reducer, initialState)
