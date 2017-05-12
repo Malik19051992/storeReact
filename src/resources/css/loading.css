@@ -1,0 +1,14 @@
+.loading {
+    position: absolute;
+    left: 40%;
+    top: 100px;
+}
+
+.loading-content {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border: none;
+}
+

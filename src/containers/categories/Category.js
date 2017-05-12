@@ -1,23 +1,24 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import Category from '../../components/main/categories/Category'
 import {getCategoryById} from '../../redux/modules/categories'
 
-class categoryContainer extends Component {
+class CategoryContainer extends Component {
 
     componentDidUpdate(prevProps) {
-        if(prevProps)
-        if(prevProps.match.params.id !== this.props.match.params.id) {
+    if (prevProps)
+        if (prevProps.match.params.categoryId !== this.props.match.params.categoryId) {
+
             this.fetchData();
         }
-    }
+}
 
     componentDidMount() {
         this.fetchData();
     }
 
     fetchData() {
-        this.props.getCategoryById(this.props.match.params.id);
+        this.props.getCategoryById(this.props.match.params.categoryId);
     }
 
     render() {
@@ -26,12 +27,11 @@ class categoryContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-    category: state.categoriesData.category,
-    error: state.categoriesData.error
+    category: state.categoriesData.category
 })
 
 const mapDispatchToProps = {
     getCategoryById
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(categoryContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryContainer)

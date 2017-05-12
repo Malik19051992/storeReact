@@ -1,3 +1,3 @@
-export default from './categoryDataProvider'
-export * from './categoryDataProvider'
+export default from './dataProvider'
+export * from './dataProvider'
 

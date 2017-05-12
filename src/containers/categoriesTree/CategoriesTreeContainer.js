@@ -15,8 +15,7 @@ class categoriesTreeContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-    categoriesTree: state.categoriesData.categoriesTree,
-    error: state.categoriesData.error
+    categoriesTree: state.categoriesData.categoriesTree
 })
 
 const mapDispatchToProps = {

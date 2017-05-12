@@ -6,12 +6,19 @@ import Home from './components/main/Home';
 import Categories from './containers/categories/Categories'
 import CreateCategory from './containers/categories/CreateCategory';
 import Category from './containers/categories/Category';
-import Attributties from './containers/attributties/Attributties'
-import CreateAttribute from './containers/attributties/CreateAttribute';
-import Attribute from './containers/attributties/Attribute';
+import Attributes from './containers/attributes/attributes'
+import CreateAttribute from './containers/attributes/CreateAttribute';
+import Attribute from './containers/attributes/Attribute';
+import AttributesCategory from './containers/attributeCategory/attributesCategory'
+import Goods from './containers/goods/Goods'
+import Good from './containers/goods/Good'
+import CreateGood from './containers/goods/CreateGood'
+import Error from './containers/ErrorPage';
 
 
-class App extends Component {
+
+export default class App extends Component {
+
     render() {
         return (
             <div>
@@ -21,16 +28,28 @@ class App extends Component {
                         <CategoriesTree />
                     </div>
                     <main>
+                        <Error/>
                         <Switch>
                             <Route exact path='/' component={Home}/>
                             <Route exact path='/categories/' component={Categories}/>
-                            <Route path='/categories/:id' component={Category}/>
-                            <Route path='/createCategory/' component={CreateCategory}/>
-                            <Route exact path='/attributties/' component={Attributties}/>
+                            <Route exact path='/categories/:categoryId' component={Category}> </Route>
+                            <Route exact path='/categories/:categoryId/goods/' component={Goods}/>
+                            <Route exact path='/categories/:categoryId/goods/:goodId' component={Goods}/>
+                            <Route exact path='/categories/:categoryId/createGood/' component={CreateGood}/>
+                            <Route exact path='/categories/:categoryId/createGood/:goodId' component={CreateGood}/>
+                            <Route path='/categories/:categoryId/attributes' component={AttributesCategory}/>
+                            <Route exact path='/createCategory/' component={CreateCategory}/>
+                            <Route path='/createCategory/:id' component={CreateCategory}/>
+
+                            <Route exact path='/attributes/' component={Attributes}/>
+                            <Route path='/attributes/:id' component={Attribute}/>
                             <Route exact path='/createAttribute/' component={CreateAttribute}/>
-                            <Route path='/attributties/:id' component={Attribute}/>
+                            <Route exact path='/createAttribute/:id' component={CreateAttribute}/>
 
-
+                            <Route exact path='/goods/' component={Goods}/>
+                            <Route exact path='/goods/:goodId' component={Good}/>
+                            <Route exact path='/createGood/' component={CreateGood}/>
+                            <Route exact path='/createGood/:goodId' component={CreateGood}/>
                         </Switch>
                     </main>
                 </div>
@@ -40,4 +59,5 @@ class App extends Component {
 }
 
 
-export default App;
+
+

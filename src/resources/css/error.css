@@ -1,0 +1,32 @@
+.error-modal-page {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.error-modal-page-not-show{
+    display: none;
+}
+
+.error-modal-page-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    height: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-weight: bold;
+}
+
+.error-title{
+    color: #ff0000;
+}

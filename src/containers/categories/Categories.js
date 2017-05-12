@@ -1,26 +1,26 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Categories from '../../components/main/categories/Categories'
-import {getCategories} from '../../redux/modules/categories'
+import {getCategories,deleteCategory} from '../../redux/modules/categories'
 
-class categoriesContainer extends Component {
+class CategoriesContainer extends Component {
 
     componentDidMount() {
         this.props.getCategories();
     }
 
     render() {
-        return <Categories {...this.props}/>
+        return <Categories {...this.props} deleteCategory={this.props.deleteCategory}/>
     }
 }
 
 const mapStateToProps = state => ({
-    categories: state.categoriesData.categories,
-    error: state.categoriesData.error
+    categories: state.categoriesData.categories
 })
 
-const mapDispatchToProps = {
-    getCategories
-}
+const mapDispatchToProps = dispatch => ({
+    getCategories: () => dispatch(getCategories()),
+    deleteCategory: (id) => dispatch(deleteCategory(id))
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(categoriesContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(CategoriesContainer)

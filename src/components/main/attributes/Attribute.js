@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import Loading from '../../Loading'
 
-export default function Attribute({attribute, error}) {
-    if (error) {
-        return <div>{error} </div>
-    }
+export default function Attribute({attribute}) {
     if (!attribute)
-        return <div><p>Loading...</p></div>
+        return <Loading/>
     else {
         return (
             <table className="data-table">

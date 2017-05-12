@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Attribute from '../../components/main/attributties/Attribute'
-import {getAttributeById} from '../../redux/modules/attributties'
+import Attribute from '../../components/main/attributes/Attribute'
+import {getAttributeById} from '../../redux/modules/attributes'
 
 class attributeContainer extends Component {
 
@@ -26,8 +26,7 @@ class attributeContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-    attribute: state.attributtiesData.attribute,
-    error: state.attributtiesData.error
+    attribute: state.attributesData.attribute
 })
 
 const mapDispatchToProps = {

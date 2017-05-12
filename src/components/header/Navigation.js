@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import '../../resources/css/nav.css'
 
 class Navigation extends Component {
     render() {
@@ -9,7 +10,7 @@ class Navigation extends Component {
                     <li><Link to='/'>Главная</Link></li>
                     <li><Link to='/'>Администрирование</Link>
                         <ul>
-                            <li><Link to='/attributties'>Атрибуты</Link>
+                            <li><Link to='/attributes'>Атрибуты</Link>
                                 <ul>
                                     <li><Link to='/createAttribute/'>Добавить атрибут</Link></li>
                                 </ul>
@@ -17,6 +18,11 @@ class Navigation extends Component {
                             <li><Link to='/categories/'>Категории</Link>
                                 <ul>
                                     <li><Link to='/createCategory/'>Добавить категорию</Link></li>
+                                </ul>
+                            </li>
+                            <li><Link to='/goods/'>Товары</Link>
+                                <ul>
+                                    <li><Link to='/createGood/'>Добавить товар</Link></li>
                                 </ul>
                             </li>
                         </ul>
