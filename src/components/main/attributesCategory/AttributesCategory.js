@@ -58,35 +58,37 @@ class AttributesCategory extends Component {
                     </tr>);
             }
             return (
-                <table>
-                    <tbody>
-                    {attrsRow}
-                    <tr>
-                        <td></td>
-                        <td>
-                            <button onClick={() => {
-                                let toSaveData = [];
-                                for (let i = 0; i < this.state.elements.length; i++)
-                                    if (this.state.elements[i].checked)
+                <div className="main-content">
+                    <table className="input-table">
+                        <tbody>
+                        {attrsRow}
+                        <tr>
+                            <td></td>
+                            <td>
+                                <button className="positive"  onClick={() => {
+                                    let toSaveData = [];
+                                    for (let i = 0; i < this.state.elements.length; i++)
+                                        if (this.state.elements[i].checked)
+                                            toSaveData.push({
+                                                CategoryId: +this.props.category.id,
+                                                AttributeId: +this.state.elements[i].id
+                                            });
+                                    if (toSaveData.length === 0) {
                                         toSaveData.push({
                                             CategoryId: +this.props.category.id,
-                                            AttributeId: +this.state.elements[i].id
+                                            AttributeId: 0
                                         });
-                                if (toSaveData.length === 0) {
-                                    toSaveData.push({
-                                        CategoryId: +this.props.category.id,
-                                        AttributeId: 0
-                                    });
-                                }
-                                this.props.saveAttributesCategory(toSaveData, +this.props.category.id)
-                                    .then(() => this.props.history.push(`/categories/`))
-                                    .catch(error => alert('Запись не удалась'))
-                            }}>Сохранить
-                            </button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                                    }
+                                    this.props.saveAttributesCategory(toSaveData, +this.props.category.id)
+                                        .then(() => this.props.history.push(`/categories/`))
+                                        .catch(error => alert('Запись не удалась'))
+                                }}>Сохранить
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             )
         }
     }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Loading from '../Loading'
+import '../../resources/css/tree-menu.css'
 
 export default function TreeBranch({categoriesTree}) {
     if (!categoriesTree)

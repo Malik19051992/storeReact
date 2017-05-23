@@ -27,7 +27,7 @@ class Good extends Component {
                 </tr>)
             });
             return (
-                < div >
+                <div className="main-content">
                     <table className="data-table">
                         <tbody>
                         <tr>

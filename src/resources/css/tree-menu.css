@@ -1,33 +1,42 @@
-#tree-menu {
+.tree-menu {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 10px 0 10px 10px;
     padding: 0 0 0 10px;
     width: 300px;
+    background-color: #fafafa;
+    border: #ccc 1px solid;
+    border-radius: 3px;
+    color: #666;
+    font-size: 15px;
+    text-shadow: 1px 1px 0px #fff;
+    align-self:stretch;
 }
 
-#tree-menu li {
+
+.tree-menu li {
     position: relative;
     margin-left: -15px;
     list-style: none;
 }
 
-
-#tree-menu li label {
+.tree-menu li label {
     cursor: pointer;
     display: block;
     padding-left: 14px;
 }
 
-#tree-menu li.last-category {
+.tree-menu li.last-category {
     margin-left: -1px !important;
 }
 
-#tree-menu li.last-category a {
+.tree-menu li.last-category a {
 
     padding-left: 1px;
     text-decoration: none;
     display: block;
 }
 
-#tree-menu li input {
+.tree-menu li input {
     position: absolute;
     left: 0;
     margin-left: 0;
@@ -39,20 +48,20 @@
     top: 0;
 }
 
-#tree-menu li input + ol {
+.tree-menu li input + ol {
     background: url(../img/toggle-small-expand.png) 40px 0 no-repeat;
     margin: -0.938em 0 0 -44px; /* 15px */
     height: 1em;
     display: block;
 }
 
-#tree-menu li input + ol > li {
+.tree-menu li input + ol > li {
     display: none;
     margin-left: -14px !important;
     padding-left: 1px;
 }
 
-#tree-menu li input:checked + ol {
+.tree-menu li input:checked + ol {
     background: url(../img/toggle-small.png) 40px 5px no-repeat;
     margin: -1.25em 0 0 -44px;
     padding: 1.563em 0 0 80px;
@@ -60,24 +69,24 @@
 
 }
 
-#tree-menu li input:checked + ol > li {
+.tree-menu li input:checked + ol > li {
     display: block;
     margin: 0 0 0.125em;
 }
 
-#tree-menu li input:checked + ol > li:last-child {
+.tree-menu li input:checked + ol > li:last-child {
     margin: 0 0 0.063em;
 }
 
-#tree-menu a{
-    color:#111;
-    text-decoration:none;
+.tree-menu a {
+    text-decoration: none;
+    color: #666;
 }
 
-#tree-menu:hover a{
-    color:#111;
+.tree-menu:hover a {
+    color: #666;
 }
 
-#tree-menu:active a{
-    color:#111;
+.tree-menu:active a {
+    color: #666;
 }

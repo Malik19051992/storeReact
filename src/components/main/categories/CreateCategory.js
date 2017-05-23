@@ -42,35 +42,40 @@ class CreateCategory extends Component {
     }
 
     render() {
-        if (!this.props.category)
-            return <Loading/>
-        else {
-            let selectOptions = this.props.categories.map(item => {
-                return <option key={item.id} value={item.id}>{item.name}</option>
-            });
-            selectOptions.unshift(<option key="0" value={null}></option>)
-            return (<table>
-                <tbody>
-                <tr>
-                    <td><label htmlFor="categoryName">Название категории</label></td>
-                    <td><input id="categoryName" type="text" onChange={this.nameChange} value={this.state.name}></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label htmlFor="categoryParent">Категория родитель</label></td>
-                    <td><select id="categoryParent" onChange={this.parentChange} value={this.state.parentId}>
-                        {selectOptions}
-                    </select></td>
-                </tr>
-                <tr>
-                    <td>
-                        <button onClick={this.saveClick}>Сохранить</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>)
-        }
+        //if (!this.props.category)
+        //  return <Loading/>
+        // else {
+        let selectOptions = this.props.categories.map(item => {
+            return <option key={item.id} value={item.id}>{item.name}</option>
+        });
+        selectOptions.unshift(<option key="0" value={null}></option>)
+        return (
+            <div className="main-content">
+                <table className="input-table">
+                    <tbody>
+                    <tr>
+                        <td><label htmlFor="categoryName">Название категории</label></td>
+                        <td><input id="categoryName" type="text" onChange={this.nameChange}
+                                   value={this.state.name}></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label htmlFor="categoryParent">Категория родитель</label></td>
+                        <td><select id="categoryParent" onChange={this.parentChange} value={this.state.parentId}>
+                            {selectOptions}
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button className="positive"  onClick={this.saveClick}>Сохранить</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>)
     }
+
+    //}
 
 }
 

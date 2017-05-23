@@ -153,34 +153,38 @@ class CreateGood extends Component {
                 </tr>
             )
 
-            return (<table>
-                <tbody>
-                <tr>
-                    <td><label htmlFor="goodName">Название товара</label></td>
-                    <td><input id="goodName" type="text" onChange={this.nameChange} value={this.state.name}></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label htmlFor="goodPrice">Цена товара</label></td>
-                    <td><input id="goodPrice" pattern="\d+(\.\d{2})?" type="text" onChange={this.priceChange}
-                               value={this.state.price}></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label htmlFor="category">Категория</label></td>
-                    <td><select id="category" onChange={this.categoryChange} value={this.state.categoryId}>
-                        {selectOptionsCategory}
-                    </select></td>
-                </tr>
-                {attributesRows}
+            return (
+                <div className="main-content">
+                    <table className="input-table">
+                        <tbody>
+                        <tr>
+                            <td><label htmlFor="goodName">Название товара</label></td>
+                            <td><input id="goodName" type="text" onChange={this.nameChange}
+                                       value={this.state.name}></input>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label htmlFor="goodPrice">Цена товара</label></td>
+                            <td><input id="goodPrice" pattern="\d+(\.\d{2})?" type="text" onChange={this.priceChange}
+                                       value={this.state.price}></input>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label htmlFor="category">Категория</label></td>
+                            <td><select id="category" onChange={this.categoryChange} value={this.state.categoryId}>
+                                {selectOptionsCategory}
+                            </select></td>
+                        </tr>
+                        {attributesRows}
 
-                <tr>
-                    <td>
-                        <button onClick={this.saveClick}>Сохранить</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>)
+                        <tr>
+                            <td>
+                                <button className="positive" onClick={this.saveClick}>Сохранить</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>)
         }
     }
 }

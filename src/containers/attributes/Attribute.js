@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 import Attribute from '../../components/main/attributes/Attribute'
 import {getAttributeById} from '../../redux/modules/attributes'
 
-class attributeContainer extends Component {
+class AttributeContainer extends Component {
 
     componentDidUpdate(prevProps) {
         if(prevProps)
-            if(prevProps.match.params.id !== this.props.match.params.id) {
+            if(prevProps.match.params.attributeId !== this.props.match.params.attributeId) {
                 this.fetchData();
             }
     }
@@ -17,7 +17,7 @@ class attributeContainer extends Component {
     }
 
     fetchData() {
-        this.props.getAttributeById(this.props.match.params.id);
+        this.props.getAttributeById(this.props.match.params.attributeId);
     }
 
     render() {
@@ -33,4 +33,4 @@ const mapDispatchToProps = {
     getAttributeById
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(attributeContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(AttributeContainer)

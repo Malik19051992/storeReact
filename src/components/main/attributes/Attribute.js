@@ -7,18 +7,20 @@ export default function Attribute({attribute}) {
         return <Loading/>
     else {
         return (
-            <table className="data-table">
-                <tbody>
-                <tr>
-                    <th>Название атрибута</th>
-                    <td>{attribute.name}</td>
-                </tr>
-                <tr>
-                    <th>Тип атрибута</th>
-                    <td>{attribute.type.toString() === '1' ? 'Строка' : 'Число'}</td>
-                </tr>
-                </tbody>
-            </table>
+            <div className="main-content">
+                <table className="data-table">
+                    <tbody>
+                    <tr>
+                        <th>Название атрибута</th>
+                        <td>{attribute.name}</td>
+                    </tr>
+                    <tr>
+                        <th>Тип атрибута</th>
+                        <td>{attribute.type.toString() === '1' ? 'Строка' : 'Число'}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         )
     }
 }

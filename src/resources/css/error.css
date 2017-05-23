@@ -13,18 +13,27 @@
 }
 
 .error-modal-page-content {
-    background-color: #fefefe;
+    background-color: #fafafa;
     margin: 15% auto;
     height: auto;
     padding: 20px;
-    border: 1px solid #888;
+
     width: 80%;
+    border-radius: 3px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.close {
-    color: #aaa;
+.error-close {
+    color: #fafafa;
+    outline: none;
     float: right;
     font-weight: bold;
+    width: 18px;
+    height: 18px;
+    border-width: 0px;
+    background: url(../img/delete.ico) no-repeat;
+    right: 5px;
+    top:5px;
 }
 
 .error-title{

@@ -27,7 +27,7 @@ class Error extends Component {
         if (this.state.errors.length > 0)
             return (<div className={this.state.isShow ? "error-modal-page" : "error-modal-page-not-show"}>
                 <div className="error-modal-page-content">
-                    <button className="close" onClick={this.closeButton}>&times;</button>
+                    <button className="error-close" onClick={this.closeButton}></button>
                     <h2 className="error-title">Error</h2>
                     <p>Если данная ошибка появляется многократно, пожалуйста сообщите разработчикам</p>
                     <p>{this.props.errors[0].message}</p>

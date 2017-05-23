@@ -5,17 +5,19 @@ import Loading from '../../Loading'
 class Attributes extends Component {
 
     state = {
-        attributes: []
+        attributes: [],
+        filterValue: '',
+        filteredAttributes: []
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.attributes !== this.props.attributes) {
-            this.setState({attributes: nextProps.attributes});
+            this.setState({attributes: nextProps.attributes, filteredAttributes: nextProps.attributes});
         }
     }
 
     deleteAttribute = (event) => {
-        if(confirm("Вы уверены")) {
+        if (confirm("Вы уверены")) {
             this.props.deleteAttribute(+event.target.value);
             const attributes = this.state.attributes;
             const temp = attributes.filter((item) => item.id === +event.target.value)[0];
@@ -26,29 +28,45 @@ class Attributes extends Component {
         }
     }
 
+    filterChange = (event) => {
+        const filterValue = event.target.value.toLowerCase();
+        this.setState({
+            filterValue: filterValue,
+            filteredAttributes: this.state.attributes.filter(item => ~item.name.toLowerCase().indexOf(filterValue))
+        })
+    }
+    filterClear = () => {
+        this.setState({filterValue: '', filteredAttributes: this.state.attributes});
+    }
+
 
     render() {
         if (!this.state.attributes)
             return <Loading/>
         else {
-            const rows = this.state.attributes.map((item)=>
+            const rows = this.state.filteredAttributes.map((item) =>
                 <tr key={item.id}>
-                    <td>{item.name}</td>
+                    <td><Link to={"/attributes/" + item.id}>{item.name}</Link></td>
                     <td>{item.type.toString() === '1' ? 'Строка' : 'Число'}</td>
+
                     <td>
-                        <button onClick={() => this.props.history.push("/attributes/" + item.id)}>Детали</button>
-                    </td>
-                    <td>
-                        <button onClick={() => this.props.history.push("/createAttribute/" + item.id)}>Редактировать
+                        <button className="edit-button action-button"
+                                onClick={() => this.props.history.push("/createAttribute/" + item.id)}>
                         </button>
                     </td>
                     <td>
-                        <button onClick={this.deleteAttribute} value={item.id}>Удалить</button>
+                        <button className="delete-button action-button" onClick={this.deleteAttribute}
+                                value={item.id}></button>
                     </td>
                 </tr>
             );
             return (
-                <div>
+                <div className="main-content">
+                    <div className="filter-data">
+                        <label htmlFor="filter">Поиск: </label>
+                        <input type="text" id="filter" onChange={this.filterChange} value={this.state.filterValue}/>
+                        <button className="action-button" onClick={this.filterClear}>.</button>
+                    </div>
                     <table className="data-table">
                         <tbody>
                         <tr>
@@ -56,12 +74,21 @@ class Attributes extends Component {
                             <th>Тип атрибута</th>
                             <th></th>
                             <th></th>
-                            <th></th>
                         </tr>
                         {rows}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <button className="add-button action-button"
+                                        onClick={() => this.props.history.push("/createAttribute/")}>
+                                </button>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
-                    <button onClick={()=>this.props.history.push("/createAttribute/")}>Добавить атрибут</button>
+
                 </div>
             )
         }

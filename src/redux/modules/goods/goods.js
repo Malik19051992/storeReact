@@ -84,7 +84,7 @@ export function getGoodById(id) {
     return function (dispatch) {
         try {
             dispatch({type: GET_GOOD})
-            getGoodByIdData(id).then(res => {
+            return getGoodByIdData(id).then(res => {
                 dispatch({type: GET_GOOD_SUCCESS, payload: res})
             }).catch((error) => {
                 dispatch({type: GET_GOOD_FAILURE})
@@ -101,7 +101,7 @@ export function getGoods() {
     return function (dispatch) {
         try {
             dispatch({type: GET_GOODS})
-            getGoodsData().then(res => {
+            return getGoodsData().then(res => {
                 dispatch({type: GET_GOODS_SUCCESS, payload: res})
             }).catch((error) => {
                 dispatch({type: GET_GOODS_FAILURE})
@@ -119,7 +119,7 @@ export function getGoodsCategory(id) {
     return function (dispatch) {
         try {
             dispatch({type: GET_GOODS_CATEGORY})
-            getGoodsCategoryData(id).then(res => {
+            return getGoodsCategoryData(id).then(res => {
                 dispatch({type: GET_GOODS_CATEGORY_SUCCESS, payload: res})
             }).catch((error) => {
                 dispatch({type: GET_GOODS_CATEGORY_FAILURE})

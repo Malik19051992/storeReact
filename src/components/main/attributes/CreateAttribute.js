@@ -42,11 +42,12 @@ class CreateAttribute extends Component {
     }
 
     render() {
-        if (!this.state.attribute)
-            return <Loading/>
-        else
-            return (
-                <table>
+        //if (!this.state.attribute)
+        //    return <Loading/>
+        // else
+        return (
+            <div className="main-content">
+                <table className="input-table">
                     <tbody>
                     <tr>
                         <td><label htmlFor="attributeName">Название атрибута</label></td>
@@ -63,13 +64,14 @@ class CreateAttribute extends Component {
                     </tr>
                     <tr>
                         <td>
-                            <button onClick={this.saveClick}>Сохранить</button>
+                            <button className="positive"  onClick={this.saveClick}>Сохранить</button>
                         </td>
                     </tr>
 
                     </tbody>
                 </table>
-            )
+            </div>
+        )
     }
 
 

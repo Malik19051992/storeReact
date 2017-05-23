@@ -1,44 +1,276 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    height: 100%;
+    width: 100%;
+}
+
+#root > div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+
 }
 
 .content-site {
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+    align-self: stretch;
     display: flex;
     flex-direction: row;
 }
 
 main {
-    margin: 10px;
-}
-
-table.data-table {
-    margin: 10px;
-    border-collapse: collapse;
 
 }
 
-table.data-table td, table.data-table th {
+.main-content {
+    margin: 10px;
+}
+
+.show-block {
+    display: block;
+}
+
+.hidden-block {
+    display: none;
+}
+
+.error-message {
+    border-radius: 3px;
+    border: 1px solid #ff0000;
+    background-color: #FBC2C4;
+    color: #ff0000;
+    padding: 5px;
+    margin: 0 0 0 5px;
+    font-size: 12px;
+}
+
+.action-button {
+    padding: 0;
+    height: 18px;
+    width: 18px;
+    outline: none;
+    border-width: 0;
+}
+
+.edit-button {
+    background: url(../img/edit.ico) no-repeat;
+}
+
+.delete-button {
+    background: url(../img/delete1.ico) no-repeat;
+}
+
+.add-button {
+    background: url(../img/add1.ico) no-repeat;
+}
+
+.filter-data {
+
+    color: #666;
+    font-size: 12px;
+    background: #eaebec;
+
+    border: #ccc 1px solid;
+    border-radius: 3px;
+    padding: 5px;
+    padding-left: 20px;
+}
+
+.filter-data > input {
+    width: auto;
+    font-size: 12px;
+    outline: none;
+    border-width: 0;
+    border-radius: 3px;
+    margin: 0px 5px;
+    padding: 5px;
+}
+
+.filter-data > label {
+    font-weight: bold;
+}
+
+.filter-data > button {
+    color: #ccc;
+    width: 18px;
+    background: url(../img/delete.ico) no-repeat;
+}
+
+.input-table {
+    background-color: #fafafa;;
+    margin: 10px 0;
+    border: #ccc 1px solid;
+    border-radius: 3px;
+    font-size: 15px;
+    color: #666;
+    padding: 5px;
+}
+
+.input-table input, .input-table password, .input-tabledata {
+    border-radius: 3px;
+    border: #ccc 1px solid;
+    font-size: 12px;
     padding: 3px;
-    border: 1px solid darkgrey;
+    outline: none;
 }
 
-table.data-table th {
-    background-color: lightgrey;
-    color: black;
+.input-table select {
+    border-radius: 3px;
+    font-size: 12px;
+    outline: none;
+    border: #ccc 1px solid;
+    padding: 3px;
+    width: 100%;
 }
 
-table.data-table a{
-    color:#111;
-    text-decoration:none;
+button {
+    outline: none;
+    cursor: pointer;
+    border-radius: 3px;
+    border: 1px solid #dedede;
 }
 
-table.data-table a:hover{
-    color:blue;
+button.common {
+    color: #565656;
+    background-color: #f0f0f0;
+
+    border-top: 1px solid #eee;
+    border-left: 1px solid #eee;
+    font-size: 12px;
 }
 
-table.data-table:active a{
-    color:#111;
+button.common:hover {
+    background-color: #e1e1e1;
 }
 
+button.common:active {
+    background-color: #ccc;
+    color: #FFFFFF;
+}
+
+button.positive {
+    color: #529214;
+}
+
+button.positive:hover {
+    background-color: #E6EFC2;
+    border: 1px solid #C6D880;
+    color: #529214;
+}
+
+button.positive:active {
+    background-color: #529214;
+    border: 1px solid #529214;
+    color: #FFFFFF;
+}
+
+button.negative {
+    color: #D12F19;
+}
+
+button.negative:hover {
+    background-color: #FBE3E4;
+    border: 1px solid #FBC2C4;
+    color: #D12F19;
+}
+
+button.negative:active {
+    background-color: #D12F19;
+    border: 1px solid #D12F19;
+    color: #FFFFFF;
+}
+
+.data-table {
+    color: #666;
+    font-size: 12px;
+    text-shadow: 1px 1px 0px #fff;
+    background: #eaebec;
+    margin: 10px 0;
+    border: #ccc 1px solid;
+    border-collapse: separate;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px #d1d1d1;
+}
+
+.data-table th {
+    font-weight: bold;
+    padding: 11px 15px 12px 15px;
+    border-top: 1px solid #fafafa;
+    border-bottom: 1px solid #e0e0e0;
+
+    background: #ededed;
+}
+
+.data-table th:first-child {
+    text-align: left;
+    padding-left: 20px;
+}
+
+.data-table tr:first-child th:first-child {
+    border-top-left-radius: 3px;
+}
+
+.data-table tr:first-child th:last-child {
+    border-top-right-radius: 3px;
+}
+
+.data-table tr {
+    text-align: center;
+    padding-left: 20px;
+}
+
+.data-table tr td:first-child {
+    text-align: left;
+    padding-left: 22px;
+    border-left: 0;
+}
+
+.data-table tr td {
+    padding: 5px;
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    border-left: 1px solid #e0e0e0;
+
+    background: #fafafa;
+}
+
+.data-table tr:nth-child(even) td {
+    background: #f6f6f6;
+}
+
+.data-table tr:last-child td {
+    border-bottom: 0;
+}
+
+.data-table tr:last-child td:first-child {
+    border-bottom-left-radius: 3px;
+}
+
+.data-table tr:last-child td:last-child {
+    border-bottom-right-radius: 3px;
+}
+
+.data-table tr:hover td {
+    background: #f2f2f2;
+}
+
+.data-table a:link {
+    color: #666;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.data-table a:visited {
+    color: #999999;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.data-table a:active,
+.data-table a:hover {
+    color: #bd5a35;
+    text-decoration: underline;
+}

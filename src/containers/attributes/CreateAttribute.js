@@ -6,8 +6,8 @@ import {addAttribute, getAttributeById, updateAttribute} from '../../redux/modul
 class CreateAttributeContainer extends Component {
 
     componentDidMount() {
-        if (this.props.match.params.id)
-            this.props.getAttributeById(this.props.match.params.id)
+        if (this.props.match.params.attributeId)
+            this.props.getAttributeById(this.props.match.params.attributeId)
     }
 
     render() {

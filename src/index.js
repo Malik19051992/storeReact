@@ -10,9 +10,7 @@ const store = createStore();
 ReactDOM.render(
     <Provider store={store}>
         <Router basename="/">
-            <div>
-                <App />
-            </div>
+            <App />
         </Router>
     </Provider>,
     document.getElementById('root')
