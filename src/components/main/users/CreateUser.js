@@ -1,24 +1,31 @@
 import React, {Component} from 'react';
-import Loading from '../../Loading'
+import ValidateErrorForm from '../ValidateErrorForm'
 
 class CreateUser extends Component {
     state = {
         name: "",
         login: "",
         role: 0,
-        user: null
+        user: null,
+        users: [],
+        validateErrors: []
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.user !== this.props.user) {
-            this.setState({
-                user: nextProps.user,
-                name: nextProps.user.name,
-                login: nextProps.user.login,
-                password: nextProps.user.password,
-                role: nextProps.user.role
-            });
-        }
+        if (nextProps.user)
+            if (nextProps.user !== this.props.user) {
+                this.setState({
+                    user: nextProps.user,
+                    name: nextProps.user.name,
+                    login: nextProps.user.login,
+                    password: nextProps.user.password,
+                    role: nextProps.user.role
+                });
+            }
+        if (nextProps.users)
+            if (nextProps.users !== this.props.users) {
+                this.setState({users: nextProps.users})
+            }
     }
 
     nameChange = (event) => {
@@ -32,18 +39,47 @@ class CreateUser extends Component {
         this.setState({login: event.target.value})
     }
 
+    validateData = () => {
+        const validateErrors = [];
+        if (!this.state.login.trim()) {
+            validateErrors.push({type: 1, message: ' Поле логина не может быть путым'})
+        }
+        if (!this.state.name.trim()) {
+            validateErrors.push({type: 2, message: ' Поле имени не может быть путым'})
+        }
+        if (!this.state.role < 0 || !this.state.role > 2) {
+            validateErrors.push({type: 4, message: ' Роль введена неверно'})
+        }
+        if (validateErrors.length > 0) {
+            this.setState({validateErrors})
+            return false;
+        }
+        return true;
+    }
 
     saveClick = () => {
-        if (!this.state.user)
+        if (!this.validateData()) {
+            return;
+        }
+        const countUsers = this.state.users.filter(item => item.login === this.state.login).length;
+        if (!this.state.user) {
+            if (countUsers > 0) {
+                this.setState({validateErrors: [{type: 0, message: ' Пользователь с таким логином уже существует'}]})
+                return;
+            }
             this.props.addUser({
                 name: this.state.name,
                 login: this.state.login,
-                password: this.state.login+'123',
+                password: this.state.login + '123',
                 role: this.state.role
             })
                 .then(() => this.props.history.push('/users'))
                 .catch(error => this.props.history.push('/error/', error))
-        else {
+        } else {
+            if (countUsers > 1) {
+                this.setState({validateErrors: [{type: 0, message: ' Пользователь с таким логином уже существует'}]})
+                return;
+            }
             const userToSave = this.state.user;
             userToSave.name = this.state.name;
             userToSave.login = this.state.login;
@@ -55,8 +91,10 @@ class CreateUser extends Component {
     }
 
     render() {
+
         return (
             <div className="main-content">
+                <ValidateErrorForm validateErrors={this.state.validateErrors}/>
                 <table className="input-table">
                     <tbody>
                     <tr>
@@ -80,7 +118,7 @@ class CreateUser extends Component {
                     </tr>
                     <tr>
                         <td>
-                            <button className="positive"  onClick={this.saveClick}>Сохранить</button>
+                            <button className="positive" onClick={this.saveClick}>Сохранить</button>
                         </td>
                     </tr>
 

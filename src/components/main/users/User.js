@@ -19,10 +19,6 @@ export default function User({user}) {
                         <td>{user.login}</td>
                     </tr>
                     <tr>
-                        <th>Пароль пользователя</th>
-                        <td>{user.password}</td>
-                    </tr>
-                    <tr>
                         <th>Тип атрибута</th>
                         <td>{user.role.toString() === '0' ? 'Администратор' : user.role.toString() === '1' ? 'Модератор' : 'Пользователь'}</td>
                     </tr>

@@ -1,6 +1,7 @@
 import axios from 'axios';
+const host = require(`./../../config.json`).server.host;
 
-const host = 'http://localhost:8080/'
+//const host = 'http://localhost:8080/'
 
 export function getCategoriesTreeData() {
     return axios.get(host + 'categoriesTree/')

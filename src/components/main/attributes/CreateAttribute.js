@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import Loading from '../../Loading'
+import ValidateErrorForm from '../ValidateErrorForm'
 
 class CreateAttribute extends Component {
     state = {
         name: "",
         type: 1,
-        attribute: null
+        attribute: null,
+        validateErrors: []
     }
 
     componentWillReceiveProps(nextProps) {
@@ -27,6 +29,9 @@ class CreateAttribute extends Component {
     }
 
     saveClick = () => {
+        if (!this.validateData()) {
+            return;
+        }
         if (!this.state.attribute)
             this.props.addAttribute({name: this.state.name, type: this.state.type})
                 .then(() => this.props.history.push('/attributes'))
@@ -41,12 +46,26 @@ class CreateAttribute extends Component {
         }
     }
 
+    validateData = () => {
+        const validateErrors = [];
+        if (!this.state.name.trim()) {
+            validateErrors.push({type: 0, message: ' Название атрибута не может быть пустым'})
+        }
+        if (!this.state.type < 0 || !this.state.type > 1) {
+            validateErrors.push({type: 1, message: ' Тип введен неверно'})
+        }
+        if (validateErrors.length > 0) {
+            this.setState({validateErrors})
+            return false;
+        }
+        return true;
+    }
+
     render() {
-        //if (!this.state.attribute)
-        //    return <Loading/>
-        // else
+
         return (
             <div className="main-content">
+                <ValidateErrorForm validateErrors={this.state.validateErrors}/>
                 <table className="input-table">
                     <tbody>
                     <tr>
@@ -64,7 +83,7 @@ class CreateAttribute extends Component {
                     </tr>
                     <tr>
                         <td>
-                            <button className="positive"  onClick={this.saveClick}>Сохранить</button>
+                            <button className="positive" onClick={this.saveClick}>Сохранить</button>
                         </td>
                     </tr>
 

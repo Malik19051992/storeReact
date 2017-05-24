@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import Loading from '../../Loading'
+import ValidateErrorForm from '../ValidateErrorForm'
 
 class CreateTurnoverGoodsList extends Component {
 
     state = {
         categories: [],
         turnoverGoodsToSave: [],
-        dateAction: ''
+        dateAction: '',
+        validateErrors: []
     }
 
     componentWillReceiveProps(nextProps) {
@@ -67,7 +69,39 @@ class CreateTurnoverGoodsList extends Component {
         this.setState({dateAction: event.target.value});
     }
 
+    validateData = () => {
+        const validateErrors = [];
+
+        if (this.state.turnoverGoodsToSave
+                .filter(item => item.count < 0).length > 0) {
+            validateErrors.push({type: 0, message: ' Количество не может быть отрицательным'})
+        }
+        if (this.state.turnoverGoodsToSave
+                .filter(item => item.sellingPrice < 0).length > 0) {
+            validateErrors.push({type: 1, message: ' Цена продажи не может быть отрицательной'})
+        }
+        if (this.state.turnoverGoodsToSave
+                .filter(item => item.purchasePrice < 0).length > 0) {
+            validateErrors.push({type: 2, message: ' Цена закупки не может быть отрицательной'})
+        }
+        if (!this.state.dateAction) {
+            validateErrors.push({type: 3, message: ' Введите дату'})
+        }
+        if (this.state.turnoverGoodsToSave
+                .filter(item => item.count > 0).length === 0) {
+            validateErrors.push({type: 4, message: ' Нет товаров для сохранения'})
+        }
+        if (validateErrors.length > 0) {
+            this.setState({validateErrors})
+            return false;
+        }
+        return true;
+    }
+
     saveClick = () => {
+        if (!this.validateData()) {
+            return;
+        }
         if (this.props.otherProps.typeList === 0) {
             this.props.addTurnoverGoods(
                 this.state.turnoverGoodsToSave
@@ -103,23 +137,23 @@ class CreateTurnoverGoodsList extends Component {
                 const goodsOfCategory = this.state.turnoverGoodsToSave
                     .filter(item => item.CategoryId === this.state.categories[i].id)
                     .map(item =>
-                        <tr key={'good'+item.idForPageList}>
+                        <tr key={'good' + item.idForPageList}>
                             <td>{item.name}</td>
                             <td>{item.price}</td>
                             {this.props.otherProps.typeList === 0 ?
-                                <td><input id={"purchasePrice" + item.idForPageList} type="number"
+                                <td><input id={"purchasePrice" + item.idForPageList} type="number" min="0" step="0.01"
                                            value={item.purchasePrice}
                                            onChange={this.purchasePriceChange}/></td>
                                 :
-                                <td><input id={"sellingPrice" + item.idForPageList} type="number"
+                                <td><input id={"sellingPrice" + item.idForPageList} type="number" min="0" step="0.01"
                                            value={item.sellingPrice}
                                            onChange={this.sellingPriceChange}/></td>}
-                            <td><input id={"count" + item.idForPageList} type="number" value={item.count}
+                            <td><input id={"count" + item.idForPageList} type="number" value={item.count} min="0"
                                        onChange={this.countChange}/>
                             </td>
                         </tr>)
                 if (goodsOfCategory.length > 0) {
-                    turnoverGoodsToSaveItem.push(<tr key={'category'+this.state.categories[i].id}>
+                    turnoverGoodsToSaveItem.push(<tr key={'category' + this.state.categories[i].id}>
                         <th>{this.state.categories[i].name}</th>
                     </tr>)
                     turnoverGoodsToSaveItem = turnoverGoodsToSaveItem.concat(goodsOfCategory)
@@ -127,6 +161,7 @@ class CreateTurnoverGoodsList extends Component {
 
             }
             return <div className="main-content">
+                <ValidateErrorForm validateErrors={this.state.validateErrors}/>
                 <table className="input-table">
                     <tbody>
                     <tr>

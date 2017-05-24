@@ -142,7 +142,6 @@ class TurnoverGoods extends Component {
                             <th>Цена</th>
                             <th></th>
                             <th></th>
-
                         </tr>
                         {searchResult}
                         </tbody>

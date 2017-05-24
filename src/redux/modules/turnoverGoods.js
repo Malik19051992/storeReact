@@ -6,8 +6,8 @@ import {
     updateTurnoverGoodsData,
     deleteTurnoverGoodData
 
-} from '../../../dataProvider'
-import {ADD_ERROR} from '../errors'
+} from '../../dataProvider'
+import {ADD_ERROR} from './errors'
 
 const ADD_TURNOVER_GOOD = 'ADD_TURNOVER_GOOD';
 const ADD_TURNOVER_GOOD_SUCCESS = 'ADD_TURNOVER_GOOD_SUCCESS';

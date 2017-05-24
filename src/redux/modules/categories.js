@@ -5,8 +5,8 @@ import {
     addCategoryData,
     deleteCategoryData,
     updateCategoryData
-} from '../../../dataProvider'
-import {ADD_ERROR} from '../errors'
+} from '../../dataProvider'
+import {ADD_ERROR} from './errors'
 
 
 const ADD_CATEGORY = 'ADD_CATEGORY';

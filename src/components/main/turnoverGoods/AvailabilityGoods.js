@@ -5,7 +5,9 @@ class AvailabilityGoods extends Component {
 
     state = {
         categories: [],
-        availabilityGoods: []
+        availabilityGoods: [],
+        filterValue: '',
+        filteredAvailabilityGoods: []
     }
 
     componentWillReceiveProps(nextProps) {
@@ -18,8 +20,22 @@ class AvailabilityGoods extends Component {
         if (nextProps.availabilityGoods)
             if (nextProps.availabilityGoods !== this.props.availabilityGoods) {
 
-                this.setState({availabilityGoods: nextProps.availabilityGoods})
+                this.setState({
+                    availabilityGoods: nextProps.availabilityGoods,
+                    filteredAvailabilityGoods: nextProps.availabilityGoods
+                })
             }
+    }
+
+    filterChange = (event) => {
+        const filterValue = event.target.value.toLowerCase();
+        this.setState({
+            filterValue: filterValue,
+            filteredAvailabilityGoods: this.state.availabilityGoods.filter(item => ~item.name.toLowerCase().indexOf(filterValue) || ~item.price.toString().indexOf(filterValue) || ~item.count.toString().indexOf(filterValue))
+        })
+    }
+    filterClear = () => {
+        this.setState({filterValue: '', filteredAvailabilityGoods: this.state.goods});
     }
 
     render() {
@@ -28,7 +44,7 @@ class AvailabilityGoods extends Component {
         else {
             let availabilityGoodsItems = [];
             for (let i = 0; i < this.state.categories.length; i++) {
-                const availabilityGoodsOfCategory = this.state.availabilityGoods
+                const availabilityGoodsOfCategory = this.state.filteredAvailabilityGoods
                     .filter(item => item.CategoryId === this.state.categories[i].id)
                     .map(item =>
                         <tr key={'availabilityGood' + item.id}>
@@ -45,6 +61,11 @@ class AvailabilityGoods extends Component {
 
             }
             return <div className="main-content">
+                <div className="filter-data">
+                    <label htmlFor="filter">Поиск: </label>
+                    <input type="text" id="filter" onChange={this.filterChange} value={this.state.filterValue}/>
+                    <button className="action-button" onClick={this.filterClear}>.</button>
+                </div>
                 <table className="data-table">
                     <tbody>
                     <tr>

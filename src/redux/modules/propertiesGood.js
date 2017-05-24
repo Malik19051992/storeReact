@@ -1,7 +1,7 @@
 import {
     savePropertiesGoodData
-} from '../../../dataProvider'
-import {ADD_ERROR} from '../errors'
+} from '../../dataProvider'
+import {ADD_ERROR} from './errors'
 
 const SAVE_PROPERTIES_GOOD = 'SAVE_PROPERTIES_GOOD';
 const SAVE_PROPERTIES_GOOD_SUCCESS = 'SAVE_PROPERTIES_GOOD_SUCCESS';

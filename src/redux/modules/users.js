@@ -1,4 +1,4 @@
-import {ADD_ERROR} from '../errors'
+import {ADD_ERROR} from './errors'
 import {
     loginUserData,
     getUsersData,
@@ -7,7 +7,7 @@ import {
     updateUserData,
     deleteUserData,
     changePasswordData
-} from '../../../dataProvider'
+} from '../../dataProvider'
 import jwtDecode from 'jwt-decode';
 
 

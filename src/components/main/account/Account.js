@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Loading from '../../Loading'
+import ValidateErrorForm from '../ValidateErrorForm'
 
 
 class Account extends Component {
@@ -10,7 +11,7 @@ class Account extends Component {
         oldPassword: '',
         newPassword: '',
         newPassword2: '',
-        errorMessages: []
+        validateErrors: []
     }
 
     componentWillReceiveProps(nextProps) {
@@ -36,61 +37,61 @@ class Account extends Component {
         this.setState({newPassword2: event.target.value})
     }
 
-    changePassword = () => {
+    validateData = () => {
+        const validateErrors = [];
         if (this.state.newPassword === '' || this.state.newPassword2 === '' || this.state.oldPassword === '') {
-            this.changeMessage(2, ' Не все поля заполнены')
-            return;
+            validateErrors.push({type: 2, message: ' Не все поля заполнены'})
         }
         if (this.state.newPassword === this.state.newPassword2 && this.state.newPassword === this.state.oldPassword) {
-            this.changeMessage(3, ' Новый и старый пароли совпадать не могут')
+            validateErrors.push({type: 3, message: ' Новый и старый пароли совпадать не могут'})
+        }
+        if (this.state.newPassword !== this.state.newPassword2) {
+            validateErrors.push({type: 0, message: ' Новый пароль и подтверждение пароля не совпадает'})
+        }
+
+        if (validateErrors.length > 0) {
+            this.setState({
+                validateErrors,
+                oldPassword: '',
+                newPassword: '',
+                newPassword2: '',
+            })
+            return false;
+        }
+        return true;
+    }
+
+    changePassword = () => {
+        if (!this.validateData()) {
             return;
         }
-        if (this.state.newPassword === this.state.newPassword2) {
-            this.props.changePassword({
-                id: this.state.account.id,
-                newPassword: this.state.newPassword,
-                oldPassword: this.state.oldPassword,
-            }).then(() => {
-                this.props.history.push('/');
-            })
-                .catch(error => {
-                    this.changeMessage(1, ' Старый пароль введен неверно')
-                })
-        } else {
-            this.changeMessage(0, ' Новый пароль и подтверждение пароля не совпадает');
-        }
-    }
-
-    changeMessage = (type, message) => {
-        const messages = this.state.errorMessages;
-        const item = messages.filter((item) => item.type === type)[0];
-        if (item)
-            messages.splice(messages.indexOf(item), 1);
-
-        messages.push({type: 0, message: message});
-        this.setState({
-            oldPassword: '',
-            newPassword: '',
-            newPassword2: '',
-            errorMessages: messages
+        this.props.changePassword({
+            id: this.state.account.id,
+            newPassword: this.state.newPassword,
+            oldPassword: this.state.oldPassword,
+        }).then(() => {
+            this.props.history.push('/');
         })
-    }
+            .catch(error => {
+                this.setState({
+                    validateErrors: [{
+                        oldPassword: '',
+                        newPassword: '',
+                        newPassword2: '',
+                        type: 1, message: ' Старый пароль введен неверно'
+                    }]
+                })
+            })
 
+    }
 
     render() {
-        const errorMessages = this.state.errorMessages.map((item) =>
-            <div key={item.type}>{item.message}</div>
-        )
         if (!this.state.account)
             return <Loading/>
         else {
             return (
                 <div className="main-content">
-                    <div
-                        className={(this.state.errorMessages.length > 0 ? 'show-block' : 'hidden-block' ) + " error-message"}>
-                        {errorMessages}
-
-                    </div>
+                    <ValidateErrorForm validateErrors={this.state.validateErrors}/>
                     <table className="data-table">
                         <tbody>
                         <tr>
@@ -149,7 +150,5 @@ class Account extends Component {
     }
 }
 
-export
-default
-Account;
+export default Account;
 

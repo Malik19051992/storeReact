@@ -18,7 +18,7 @@ class EditTurnoverGood extends Component {
                 const turnoverGood = {
                     turnoverGood: nextProps.turnoverGood,
                     name: nextProps.turnoverGood.name,
-                    dateAction: nextProps.turnoverGood.dateAction.slice(0,10)
+                    dateAction: nextProps.turnoverGood.dateAction.slice(0, 10)
                 }
                 if (this.props.otherProps.typeList === 0) {
                     turnoverGood.count = nextProps.turnoverGood.count;
@@ -88,7 +88,7 @@ class EditTurnoverGood extends Component {
                     </tr>
                     <tr>
                         <td><label htmlFor="count">Количество</label></td>
-                        <td><input id="count" type="number" onChange={this.countChange}
+                        <td><input id="count" type="number" onChange={this.countChange} min="0"
                                    value={this.state.count}></input>
                         </td>
                     </tr>
@@ -96,13 +96,13 @@ class EditTurnoverGood extends Component {
                         <tr>
                             <td><label htmlFor="purchasePrice">Цена при поступлении</label></td>
                             <td><input id="purchasePrice" type="number" onChange={this.purchasePriceChange}
-                                       value={this.state.purchasePrice}></input>
+                                       value={this.state.purchasePrice} min="0" step="0.01"></input>
                             </td>
                         </tr> :
                         <tr>
                             <td><label htmlFor="sellingPrice">Цена при продаже</label></td>
                             <td><input id="sellingPrice" type="number" onChange={this.sellingPriceChange}
-                                       value={this.state.sellingPrice}></input>
+                                       value={this.state.sellingPrice} min="0" step="0.01"></input>
                             </td>
                         </tr>
                     }

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Loading from '../../Loading'
+import ValidateErrorForm from '../ValidateErrorForm'
 
 class CreateGood extends Component {
 
@@ -9,7 +10,8 @@ class CreateGood extends Component {
         categoryId: 1,
         attributesCategory: [],
         propertiesToSave: [],
-        good: null
+        good: null,
+        validateErrors: []
     }
 
     componentWillReceiveProps(nextProps) {
@@ -93,6 +95,9 @@ class CreateGood extends Component {
 
 
     saveClick = () => {
+        if (!this.validateData()) {
+            return;
+        }
         if (!this.state.good) {
             const goodToSave = {name: this.state.name, price: this.state.price, CategoryId: this.state.categoryId};
             this.props.addGood(goodToSave)
@@ -128,6 +133,24 @@ class CreateGood extends Component {
         }
     }
 
+    validateData = () => {
+        const validateErrors = [];
+        if (!this.state.name.trim()) {
+            validateErrors.push({type: 0, message: ' Название товара не может быть пустым'})
+        }
+        if (!this.state.price) {
+            validateErrors.push({type: 1, message: ' Цена товара не может быть нулевой'})
+        }
+        if (!this.state.price<0) {
+            validateErrors.push({type: 2, message: ' Цена товара не может быть меньше либо равно 0'})
+        }
+        if (validateErrors.length > 0) {
+            this.setState({validateErrors})
+            return false;
+        }
+        return true;
+    }
+
 
     render() {
         if (!this.props.categories)
@@ -155,6 +178,7 @@ class CreateGood extends Component {
 
             return (
                 <div className="main-content">
+                    <ValidateErrorForm validateErrors={this.state.validateErrors}/>
                     <table className="input-table">
                         <tbody>
                         <tr>
@@ -165,8 +189,8 @@ class CreateGood extends Component {
                         </tr>
                         <tr>
                             <td><label htmlFor="goodPrice">Цена товара</label></td>
-                            <td><input id="goodPrice" pattern="\d+(\.\d{2})?" type="text" onChange={this.priceChange}
-                                       value={this.state.price}></input>
+                            <td><input id="goodPrice" pattern="\d+(\.\d{2})?" type="number" onChange={this.priceChange}
+                                       value={this.state.price} min="0" step="0.01"></input>
                             </td>
                         </tr>
                         <tr>

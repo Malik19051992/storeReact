@@ -5,8 +5,8 @@ import {
     getGoodsCategoryData,
     updateGoodData,
     deleteGoodData
-} from '../../../dataProvider'
-import {ADD_ERROR} from '../errors'
+} from '../../dataProvider'
+import {ADD_ERROR} from './errors'
 
 const ADD_GOOD = 'ADD_GOOD';
 const ADD_GOOD_SUCCESS = 'ADD_GOOD_SUCCESS';

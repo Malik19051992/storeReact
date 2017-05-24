@@ -2,8 +2,8 @@ import {
     saveAttributesCategoryData,
     getCategoryByIdData,
     getAttributesData
-} from '../../../dataProvider'
-import {ADD_ERROR} from '../errors'
+} from '../../dataProvider'
+import {ADD_ERROR} from './errors'
 
 const SAVE_ATTRIBUTES_CATEGORY = 'SAVE_ATTRIBUTES_CATEGORY';
 const SAVE_ATTRIBUTES_CATEGORY_SUCCESS = 'SAVE_ATTRIBUTES_CATEGORY_SUCCESS';

@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import Loading from '../../Loading'
+import ValidateErrorForm from '../ValidateErrorForm'
 
 class CreateCategory extends Component {
     state = {
         name: "",
         parentId: null,
-        category: null
+        category: null,
+        validateErrors: []
     }
 
     componentWillReceiveProps(nextProps) {
@@ -27,6 +28,9 @@ class CreateCategory extends Component {
     }
 
     saveClick = () => {
+        if (!this.validateData()) {
+            return;
+        }
         if (!this.state.category)
             this.props.addCategory({name: this.state.name, parentId: this.state.parentId})
                 .then(() => this.props.history.push('/categories'))
@@ -41,16 +45,26 @@ class CreateCategory extends Component {
         }
     }
 
+    validateData = () => {
+        const validateErrors = [];
+        if (!this.state.name.trim()) {
+            validateErrors.push({type: 0, message: ' Название категории не может быть пустым'})
+        }
+        if (validateErrors.length > 0) {
+            this.setState({validateErrors})
+            return false;
+        }
+        return true;
+    }
+
     render() {
-        //if (!this.props.category)
-        //  return <Loading/>
-        // else {
         let selectOptions = this.props.categories.map(item => {
             return <option key={item.id} value={item.id}>{item.name}</option>
         });
         selectOptions.unshift(<option key="0" value={null}></option>)
         return (
             <div className="main-content">
+                <ValidateErrorForm validateErrors={this.state.validateErrors}/>
                 <table className="input-table">
                     <tbody>
                     <tr>
@@ -67,16 +81,13 @@ class CreateCategory extends Component {
                     </tr>
                     <tr>
                         <td>
-                            <button className="positive"  onClick={this.saveClick}>Сохранить</button>
+                            <button className="positive" onClick={this.saveClick}>Сохранить</button>
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </div>)
     }
-
-    //}
-
 }
 
 export default CreateCategory;

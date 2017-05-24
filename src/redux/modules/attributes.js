@@ -4,8 +4,8 @@ import {
     addAttributeData,
     updateAttributeData,
     deleteAttributeData
-} from '../../../dataProvider'
-import {ADD_ERROR} from '../errors'
+} from '../../dataProvider'
+import {ADD_ERROR} from './errors'
 
 const ADD_ATTRIBUTE = 'ADD_ATTRIBUTE';
 const ADD_ATTRIBUTE_SUCCESS = 'ADD_ATTRIBUTE_SUCCESS';
