@@ -4,7 +4,7 @@ import ValidateErrorForm from '../ValidateErrorForm'
 class CreateCategory extends Component {
     state = {
         name: "",
-        parentId: null,
+        parentId: 0,
         category: null,
         validateErrors: []
     }
@@ -14,7 +14,7 @@ class CreateCategory extends Component {
             this.setState({
                 category: nextProps.category,
                 name: nextProps.category.name,
-                parentId: nextProps.category.parentId
+                parentId: nextProps.category.parentId === null ? 0 : nextProps.category.parentId
             });
         }
     }
@@ -32,13 +32,16 @@ class CreateCategory extends Component {
             return;
         }
         if (!this.state.category)
-            this.props.addCategory({name: this.state.name, parentId: this.state.parentId})
+            this.props.addCategory({
+                name: this.state.name,
+                parentId: this.state.parentId !== 0 ? this.state.parentId : null
+            })
                 .then(() => this.props.history.push('/categories'))
                 .catch(error => this.props.history.push('/error/', error))
         else {
             const categoryToSave = this.state.category;
             categoryToSave.name = this.state.name;
-            categoryToSave.parentId = this.state.parentId;
+            categoryToSave.parentId = this.state.parentId !== 0 ? this.state.parentId : null;
             this.props.updateCategory(categoryToSave)
                 .then(() => this.props.history.push('/categories'))
                 .catch(error => this.props.history.push('/error/', error))

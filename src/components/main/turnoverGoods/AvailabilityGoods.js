@@ -34,6 +34,7 @@ class AvailabilityGoods extends Component {
             filteredAvailabilityGoods: this.state.availabilityGoods.filter(item => ~item.name.toLowerCase().indexOf(filterValue) || ~item.price.toString().indexOf(filterValue) || ~item.count.toString().indexOf(filterValue))
         })
     }
+
     filterClear = () => {
         this.setState({filterValue: '', filteredAvailabilityGoods: this.state.goods});
     }

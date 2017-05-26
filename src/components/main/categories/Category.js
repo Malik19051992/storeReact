@@ -59,7 +59,7 @@ class Category extends Component {
                             <th>Название товара</th>
                             <th>Цена</th>
                         </tr>
-                        {attrs}
+                        {goods}
                         </tbody>
                     </table>
                 </div>

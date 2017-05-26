@@ -32,11 +32,17 @@ class Users extends Component {
         const filterValue = event.target.value.toLowerCase();
         this.setState({
             filterValue: filterValue,
-            filteredUsers: this.state.users.filter(item => ~item.name.toLowerCase().indexOf(filterValue)|| ~item.login.toLowerCase().indexOf(filterValue))
+            filteredUsers: this.state.users.filter(item => ~item.name.toLowerCase().indexOf(filterValue) || ~item.login.toLowerCase().indexOf(filterValue))
         })
     }
     filterClear = () => {
         this.setState({filterValue: '', filteredUsers: this.state.users});
+    }
+
+    resetPassword = (event) => {
+        if (confirm("Вы уверены")) {
+            this.props.resetPassword(+event.target.value);
+        }
     }
 
 
@@ -48,11 +54,14 @@ class Users extends Component {
                 <tr key={item.id}>
                     <td><Link to={"/users/" + item.id}>{item.name}</Link></td>
                     <td>{item.login}</td>
-                    <td>{item.role.toString() === '0' ? 'Администратор': item.role.toString() === '1' ? 'Модератор' : 'Пользователь'}</td>
-
+                    <td>{item.role.toString() === '0' ? 'Администратор' : item.role.toString() === '1' ? 'Модератор' : 'Пользователь'}</td>
+                    <td>
+                        <button onClick={this.resetPassword} value={item.id}>Сбросить пароль</button>
+                    </td>
                     <td>
                         <button className="edit-button action-button"
-                                onClick={() => this.props.history.push("/createUser/" + item.id)}>
+                                onClick={() => this.props.history.push("/createUser/" + item.id)}
+                                value={item.id}>
                         </button>
                     </td>
                     <td>
@@ -76,9 +85,11 @@ class Users extends Component {
                             <th>Роль</th>
                             <th></th>
                             <th></th>
+                            <th></th>
                         </tr>
                         {rows}
                         <tr>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>

@@ -7,7 +7,7 @@
 #nav-menu {
     display: flex;
     height: 30px;
-    margin: 5px 5px 0 5px;
+    margin: 5px 10px 0 10px;
     padding-top: 10px;
     border: 1px solid #222;
     background-color: #111;
@@ -132,7 +132,7 @@
 }
 
 #nav-menu .enter-button{
-    right:6px;
+    right:12px;
     position: absolute;
 
 }

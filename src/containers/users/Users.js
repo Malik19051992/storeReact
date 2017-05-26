@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Users from '../../components/main/users/Users'
-import {getUsers, deleteUser} from '../../redux/modules/users'
+import {getUsers, deleteUser, resetPassword} from '../../redux/modules/users'
 
 class UsersContainer extends Component {
 
@@ -10,7 +10,7 @@ class UsersContainer extends Component {
     }
 
     render() {
-        return <Users {...this.props} deleteUser={this.props.deleteUser}/>
+        return <Users {...this.props} deleteUser={this.props.deleteUser} resetPassword={this.props.resetPassword}/>
     }
 }
 
@@ -20,7 +20,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     getUsers: () => dispatch(getUsers()),
-    deleteUser: (id) => dispatch(deleteUser(id))
+    deleteUser: (id) => dispatch(deleteUser(id)),
+    resetPassword: (id) => dispatch(resetPassword(id)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)

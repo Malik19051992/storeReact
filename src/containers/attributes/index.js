@@ -1,3 +1,9 @@
-export default from './Attribute'
-export default from './CreateAttribute'
-export default from './Attributes'
+import Attribute from  './Attribute'
+import CreateAttribute from './CreateAttribute'
+import Attributes from './Attributes'
+
+export {
+    Attribute,
+    CreateAttribute,
+    Attributes
+}

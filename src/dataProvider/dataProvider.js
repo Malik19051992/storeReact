@@ -170,3 +170,9 @@ export function getAvailabilityGoodsData() {
     return axios.get(host + `availabilityGoods`, {headers: {authorization: localStorage.getItem('token')}})
         .then(res => res.data);
 }
+
+export function resetPasswordData(id) {
+    return axios.post(host + `resetPassword/${id}`, JSON.stringify({}), {headers: {authorization: localStorage.getItem('token')}})
+        .then(res => res.data);
+}
+

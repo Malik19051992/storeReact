@@ -6,7 +6,8 @@ import {
     addUserData,
     updateUserData,
     deleteUserData,
-    changePasswordData
+    changePasswordData,
+    resetPasswordData
 } from '../../dataProvider'
 import jwtDecode from 'jwt-decode';
 
@@ -15,6 +16,10 @@ const LOGIN_USER = "LOGIN_USER";
 const LOGIN_USER_FAILURE = "LOGIN_USER_FAILURE";
 const LOGIN_USER_SUCCESS = "LOGIN_USER_SUCCESS";
 const LOGOUT_USER = "LOGOUT_USER";
+
+const RESET_PASSWORD = "RESET_PASSWORD";
+const RESET_PASSWORD_FAILURE = "RESET_PASSWORD_FAILURE";
+const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
 
 const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
 const CHANGE_PASSWORD_SUCCESS = 'CHANGE_PASSWORD_SUCCESS';
@@ -51,16 +56,13 @@ export function loginUser(data) {
             dispatch({type: LOGIN_USER})
             return loginUserData(data).then(res => {
                 dispatch({type: LOGIN_USER_SUCCESS, payload: res.token})
-
             }).catch((error) => {
                 dispatch({type: LOGIN_USER_FAILURE})
             })
-
         } catch (error) {
             dispatch({type: LOGIN_USER_FAILURE})
         }
     }
-
 }
 
 export function logoutUser() {
@@ -133,6 +135,22 @@ export function deleteUser(id) {
         }
     }
 }
+
+export function resetPassword(id) {
+    return function (dispatch) {
+        try {
+            dispatch({type: RESET_PASSWORD})
+            return resetPasswordData(id).then(res => {
+                dispatch({type: RESET_PASSWORD_SUCCESS, payload: res})
+                return res;
+            })
+        } catch (error) {
+            dispatch({type: RESET_PASSWORD_FAILURE})
+            dispatch({type: ADD_ERROR, error: error})
+        }
+    }
+}
+
 
 export function getUserById(id) {
     return function (dispatch) {
@@ -213,7 +231,8 @@ export default function reducer(state = getInitialState(), action) {
             return {...state, ok: action.payload}
         case CHANGE_PASSWORD_SUCCESS:
             return {...state, ok: action.payload}
-
+        case RESET_PASSWORD_SUCCESS:
+            return {...state, ok: action.payload}
         default:
             return state
     }

@@ -8,6 +8,7 @@ import propertiesGood from './modules/propertiesGood'
 import errors from './modules/errors'
 import users from './modules/users'
 import turnoverGoods from './modules/turnoverGoods'
+import breadcrumbs from './modules/breadcrumbs'
 
 import {createLogger} from 'redux-logger'
 
@@ -25,7 +26,8 @@ const reducer = combineReducers({
     propertiesGoodData: propertiesGood,
     errorsData: errors,
     usersData: users,
-    turnoverGoodsData: turnoverGoods
+    turnoverGoodsData: turnoverGoods,
+    breadcrumbsData: breadcrumbs
 })
 
 export default initialState => createStoreWithMiddleware(reducer, initialState)

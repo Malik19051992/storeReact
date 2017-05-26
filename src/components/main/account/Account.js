@@ -106,13 +106,15 @@ class Account extends Component {
                             <td>Роль пользователя</td>
                             <td>{this.state.account.role.toString() === '0' ? 'Администратор' : this.state.account.role.toString() === '1' ? 'Модератор' : 'Пользователь'}</td>
                         </tr>
+
+                             <button className={this.state.isShowChangingPassword ? 'hidden-block' : 'show-block'}
+                                         onClick={() => {
+                                             this.setState({isShowChangingPassword: true})
+                                         }}>Сменить пароль
+                            </button>
                         </tbody>
                     </table>
-                    <button className={this.state.isShowChangingPassword ? 'hidden-block' : 'show-block'}
-                            onClick={() => {
-                                this.setState({isShowChangingPassword: true})
-                            }}>Сменить пароль
-                    </button>
+
                     <table
                         className={(this.state.isShowChangingPassword ? 'show-block' : 'hidden-block') + ' input-table'}>
                         <tbody>

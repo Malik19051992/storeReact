@@ -5,8 +5,8 @@ import {Link} from 'react-router-dom';
 class TurnoverGoods extends Component {
 
     state = {
-        dateAction: null,
-        categoryId: null,
+        dateAction: '',
+        categoryId: 0,
         searchResults: [],
         filterValue: '',
         filteredTurnoverGoods: []
@@ -42,7 +42,7 @@ class TurnoverGoods extends Component {
     searchClick = () => {
 
         this.props.findTurnoverGoods({
-            categoryId: this.state.categoryId,
+            categoryId: this.state.categoryId !== 0 ? this.state.categoryId : null,
             dateAction: this.state.dateAction,
             typeList: this.props.otherProps.typeList
         })
@@ -70,7 +70,7 @@ class TurnoverGoods extends Component {
             let selectOptions = this.props.categories.map(item => {
                 return <option key={item.id} value={item.id}>{item.name}</option>
             });
-            selectOptions.unshift(<option key="0" value={null}></option>)
+            selectOptions.unshift(<option key="0" value="0"></option>)
 
             const searchResult = this.state.filteredTurnoverGoods.map(item =>
                 <tr key={item.id}>
@@ -116,8 +116,8 @@ class TurnoverGoods extends Component {
                         <tr>
                             <td>Дата</td>
                             <td>
-                                <td><input id={"dateAction"} type="date" value={this.state.dateAction}
-                                           onChange={this.dateActionChange}/></td>
+                                <input id={"dateAction"} type="date" value={this.state.dateAction}
+                                       onChange={this.dateActionChange}/>
                             </td>
                         </tr>
                         <tr>

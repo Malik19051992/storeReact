@@ -1,4 +1,10 @@
-export default from './Categories'
-export default from './Category'
-export default from './CreateCategory'
+import Categories from './Categories'
+import Category from './Category'
+import CreateCategory from './CreateCategory'
+
+export {
+    Categories,
+    Category,
+    CreateCategory
+}
 

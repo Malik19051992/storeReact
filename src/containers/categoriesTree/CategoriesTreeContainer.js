@@ -1,16 +1,16 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import TreeBranch from '../../components/main/TreeBranch'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import CategoriesTree from '../../components/main/CategoriesTree'
 import {getCategoriesTree} from '../../redux/modules/categories'
 
-class categoriesTreeContainer extends Component {
+class CategoriesTreeContainer extends Component {
 
     componentDidMount() {
         this.props.getCategoriesTree();
     }
 
     render() {
-        return <TreeBranch {...this.props}/>
+        return <CategoriesTree {...this.props}/>
     }
 }
 
@@ -22,4 +22,4 @@ const mapDispatchToProps = {
     getCategoriesTree
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(categoriesTreeContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(CategoriesTreeContainer)

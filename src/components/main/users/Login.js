@@ -54,10 +54,8 @@ class Login extends Component {
                             <td>
                                 <button onClick={this.enterClick}>Войти</button>
                             </td>
-                            <td>Забыли пароль?</td>
-                            <td>
-
-                            </td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         </tbody>
                     </table>

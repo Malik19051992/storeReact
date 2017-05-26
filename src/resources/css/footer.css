@@ -6,14 +6,25 @@ footer {
     border-radius: 3px;
     color: #666;
     bottom: 0;
-    height: 100px;
+    min-height: 100px;
+    height: auto;
     align-self:stretch;
     display: flex;
     flex-direction: row;
     padding: 5px;
     font-size: 12px;
+    line-height: 1.5;
 }
 
 .site-about, .contacts {
+    width: 70%;
+}
+
+.contacts {
+    margin-left: 10px;
     width: 30%;
+}
+
+footer h3{
+    margin:  5px 0;
 }

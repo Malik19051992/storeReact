@@ -1,4 +1,11 @@
-export default from './User'
-export default from './CreateUser'
-export default from './Users'
-export default from './Login'
+import CreateUser from  './CreateUser'
+import Login from './Login'
+import User from './User'
+import Users from './Users'
+
+export {
+    CreateUser,
+    Login,
+    User,
+    Users
+}

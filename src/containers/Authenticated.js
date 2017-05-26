@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import AccessError from '../components/AccessError'
+import {setBreadcrumbs} from '../redux/modules/breadcrumbs'
 
 
 export function requireAuthentication(Component, roleIndexArray, props) {
@@ -9,6 +10,7 @@ export function requireAuthentication(Component, roleIndexArray, props) {
 
         componentWillMount() {
             this.checkAuth(this.props.isAuthenticated);
+            this.props.setBreadcrumbs(this.props.location.pathname)
         }
 
         componentWillReceiveProps(nextProps) {
@@ -21,6 +23,10 @@ export function requireAuthentication(Component, roleIndexArray, props) {
             }
         }
 
+        componentDidUpdate(prevProps) {
+            this.props.setBreadcrumbs(this.props.location.pathname)
+        }
+
         render() {
             return (
                 <div>
@@ -30,7 +36,6 @@ export function requireAuthentication(Component, roleIndexArray, props) {
                     }
                 </div>
             )
-
         }
     }
 
@@ -41,7 +46,10 @@ export function requireAuthentication(Component, roleIndexArray, props) {
         role: state.usersData.role,
         otherProps: props
     });
+    const mapDispatchToProps = dispatch => ({
+        setBreadcrumbs: (path) => dispatch(setBreadcrumbs(path))
+    })
 
-    return connect(mapStateToProps)(AuthenticatedComponent);
+    return connect(mapStateToProps, mapDispatchToProps)(AuthenticatedComponent);
 
 }
