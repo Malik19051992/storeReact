@@ -102,7 +102,7 @@ class CreateTurnoverGoodsList extends Component {
         if (!this.validateData()) {
             return;
         }
-        if (this.props.otherProps.typeList === 0) {
+        if (this.props.otherParametrs.typeList === 0) {
             this.props.addTurnoverGoods(
                 this.state.turnoverGoodsToSave
                     .filter(item => item.count > 0)
@@ -140,7 +140,7 @@ class CreateTurnoverGoodsList extends Component {
                         <tr key={'good' + item.idForPageList}>
                             <td>{item.name}</td>
                             <td>{item.price}</td>
-                            {this.props.otherProps.typeList === 0 ?
+                            {this.props.otherParametrs.typeList === 0 ?
                                 <td><input id={"purchasePrice" + item.idForPageList} type="number" min="0" step="0.01"
                                            value={item.purchasePrice}
                                            onChange={this.purchasePriceChange}/></td>
@@ -167,7 +167,7 @@ class CreateTurnoverGoodsList extends Component {
                     <tr>
                         <th>Название товара</th>
                         <th>Цена товара</th>
-                        {this.props.otherProps.typeList === 0 ?
+                        {this.props.otherParametrs.typeList === 0 ?
                             <th>Цена при поступлении</th> :
                             <th>Цена при продаже</th>}
                         <th>Количество</th>

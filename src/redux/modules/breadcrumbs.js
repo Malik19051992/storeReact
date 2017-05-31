@@ -141,7 +141,22 @@ function getLinks(path) {
                 linkSum += 'termsOfUse/';
                 result.push({text: 'Пользовательское соглашение', link: linkSum})
                 break;
-
+            case 'createArrivedGoodsByCategory'.toLowerCase():
+                linkSum += 'createArrivedGoodsByCategory/';
+                result.push({text: 'Товары категории', link: linkSum})
+                if (parseInt(pathArray[i + 1])) {
+                    linkSum += pathArray[i + 1] + '/';
+                    result.push({text: 'Поступление товаров категории', link: linkSum})
+                }
+                break;
+            case 'createSoldGoodsByCategory'.toLowerCase():
+                linkSum += 'createSoldGoodsByCategory/';
+                result.push({text: 'Товары категории', link: linkSum})
+                if (parseInt(pathArray[i + 1])) {
+                    linkSum += pathArray[i + 1] + '/';
+                    result.push({text: 'Продажа товаров категории', link: linkSum})
+                }
+                break;
 
         }
     }

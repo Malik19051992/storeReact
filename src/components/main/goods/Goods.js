@@ -1,19 +1,20 @@
 import React, {Component} from 'react';
 import Loading from '../../Loading'
 import {Link} from 'react-router-dom';
+import DataTable from '../DataTable'
 
 class Goods extends Component {
 
     state = {
         goods: [],
-        filterValue: '',
-        filteredGood: []
+        filterValue: ''
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.goods !== this.props.goods) {
-            this.setState({goods: nextProps.goods, filteredGood: nextProps.goods});
-        }
+        if (nextProps.goods)
+            if (nextProps.goods !== this.props.goods) {
+                this.setState({goods: nextProps.goods});
+            }
     }
 
     deleteGood = (event) => {
@@ -28,77 +29,60 @@ class Goods extends Component {
         }
     }
 
-    filterChange = (event) => {
+    editGood = (event) => {
+        if (this.props.match.params.categoryId)
+            return this.props.history.push(`/categories/${this.props.match.params.categoryId}/createGood/${+event.target.value}`)
+        else
+            return this.props.history.push("/createGood/" + (+event.target.value))
+    }
+
+    changeFilterValue = (event) => {
         const filterValue = event.target.value.toLowerCase();
         this.setState({
-            filterValue: filterValue,
-            filteredGood: this.state.goods.filter(item => ~item.name.toLowerCase().indexOf(filterValue) || ~item.price.toString().indexOf(filterValue))
+            filterValue: filterValue
         })
     }
-    filterClear = () => {
-        this.setState({filterValue: '', filteredGood: this.state.goods});
+    clearFilterValue = () => {
+        this.setState({filterValue: ''});
+    }
+
+    findFilterValue = () => {
+        this.props.changePage(this.props.match.params.categoryId, this.props.pageSize, 1, this.state.filterValue)
+        //this.props.findByFilterValue(this.props.match.params.categoryId, this.props.pageSize, 1, this.state.filterValue);
+    }
+
+    changePage = (pageNumber) => {
+        this.props.changePage(this.props.match.params.categoryId, this.props.pageSize, pageNumber, this.state.filterValue)
+    }
+
+    addGood = () => {
+        this.props.history.push("/createGood/");
     }
 
     render() {
         if (!this.state.goods)
             return <Loading/>
         else {
-            const rows = this.state.filteredGood.map((item) =>
-                <tr key={item.id}>
-                    <td><Link to={"/goods/" + item.id}> {item.name}</Link></td>
-                    <td>{item.price}</td>
-                    <td>
-                        <button className="edit-button action-button" onClick={() => {
-                            if (this.props.categoryId)
-                                return this.props.history.push(`/categories/${this.props.categoryId}/createGood/${item.id}`)
-                            else
-                                return this.props.history.push("/createGood/" + item.id)
-                        }}>
-                        </button>
-                    </td>
-                    <td>
-                        <button className="delete-button action-button" onClick={this.deleteGood}
-                                value={item.id}></button>
-                    </td>
-                </tr>
-            );
             return (
                 <div className="main-content">
                     <div className="filter-data">
                         <label htmlFor="filter">Поиск: </label>
-                        <input type="text" id="filter" onChange={this.filterChange} value={this.state.filterValue}/>
-                        <button className="action-button" onClick={this.filterClear}>.</button>
+                        <input type="text" id="filter" onChange={this.changeFilterValue}
+                               value={this.state.filterValue}/>
+                        <button className="find-button action-button" onClick={this.findFilterValue}>.</button>
+                        <button className="clear-button action-button" onClick={this.clearFilterValue}>.</button>
                     </div>
 
-                    <table className="data-table">
-                        <tbody>
-                        <tr>
-                            <th>Название товара</th>
-                            <th>Цена товара</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        {rows}
-                        <tr>
-                            <td>
+                    <DataTable header={["Название товара", "Цена товара"]} columns={["nameElement", "price"]}
+                               data={this.state.goods.map(item => {
+                                   item.nameElement = <Link to={"/goods/" + item.id}> {item.name}</Link>;
+                                   return item;
+                               })}
 
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <button className="add-button action-button" onClick={() => {
-                                    if (this.props.categoryId)
-                                        return this.props.history.push(`/categories/${this.props.categoryId}/createGood/`)
-                                    else
-                                        return this.props.history.push("/createGood/")
-                                }}>
-                                </button>
-                            </td>
-
-                        </tr>
-                        </tbody>
-                    </table>
-
+                               editFunction={this.editGood}
+                               deleteFunction={this.deleteGood} addFunction={this.addGood}
+                               dataCountAll={this.props.countGoods} dataCountOnPage={this.props.pageSize}
+                               activePage={this.props.pageNumber} changePage={this.changePage}/>
                 </div>
             )
         }

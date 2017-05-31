@@ -13,6 +13,11 @@ export function getCategoriesData() {
         .then(res => res.data);
 }
 
+export function getCategoriesForPageData(pageSize, pageNumber, filterValue) {
+    return axios.post(host + `categories/${pageSize}/${pageNumber}`, JSON.stringify({filterValue}), {headers: {authorization: localStorage.getItem('token')}})
+        .then(res => res.data);
+}
+
 export function getCategoryByIdData(id) {
     return axios.get(host + `categories/${id}`, {headers: {authorization: localStorage.getItem('token')}})
         .then(res => res.data);
@@ -72,8 +77,18 @@ export function getGoodsData() {
         .then(res => res.data);
 }
 
+export function getGoodsForPageData(pageSize, pageNumber, filterValue) {
+    return axios.post(host + `goods/${pageSize}/${pageNumber}`, JSON.stringify({filterValue}))
+        .then(res => res.data);
+}
+
 export function getGoodsCategoryData(id) {
     return axios.get(host + `categories/${id}/goods`)
+        .then(res => res.data);
+}
+
+export function getGoodsCategoryForPageData(id, pageSize, pageNumber, filterValue) {
+    return axios.post(host + `categories/${id}/goods/${pageSize}/${pageNumber}`, JSON.stringify({filterValue}))
         .then(res => res.data);
 }
 

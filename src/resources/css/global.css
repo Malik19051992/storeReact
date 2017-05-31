@@ -6,10 +6,10 @@ html {
 }
 
 body {
-    margin: 0;
+
     padding: 0;
     height: 100%;
-    width: 100%;
+    margin: 0;
     display: flex;
     flex-direction: column;
     flex: auto;
@@ -124,8 +124,16 @@ main {
     background: url(../img/delete1.ico) no-repeat;
 }
 
+.find-button {
+    background: url(../img/find.ico) no-repeat;
+}
+
 .add-button {
     background: url(../img/add1.ico) no-repeat;
+}
+
+.clear-button {
+    background: url(../img/delete.ico) no-repeat;
 }
 
 .filter-data {
@@ -156,7 +164,8 @@ main {
 .filter-data > button {
     color: #ccc;
     width: 18px;
-    background: url(../img/delete.ico) no-repeat;
+    margin-left: 15px;
+    margin-right: 5px;
 }
 
 .input-table {
@@ -169,7 +178,7 @@ main {
     padding: 5px;
 }
 
-.input-table input{
+.input-table input {
     border-radius: 3px;
     border: #ccc 1px solid;
     font-size: 12px;
@@ -191,6 +200,7 @@ button {
     cursor: pointer;
     border-radius: 3px;
     border: 1px solid #dedede;
+    max-width: 140px;
 }
 
 button.common {
@@ -242,6 +252,34 @@ button.negative:active {
     border: 1px solid #D12F19;
     color: #FFFFFF;
 }
+
+.pagination {
+    margin: 20px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.pagination div button {
+    text-align: center;
+    float: left;
+    margin: 0 15px 0 0;
+    height: 22px;
+    width: 22px;
+    background: #eaebec;
+    border-radius: 50%;
+}
+
+.pagination div button:hover {
+    background-color: #d1d1d1;
+    cursor: pointer;
+}
+
+.pagination div button.active {
+    background-color: #d1d1d1;
+}
+
+
+
 
 .data-table {
     color: #666;

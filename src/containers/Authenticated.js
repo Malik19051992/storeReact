@@ -4,7 +4,7 @@ import AccessError from '../components/AccessError'
 import {setBreadcrumbs} from '../redux/modules/breadcrumbs'
 
 
-export function requireAuthentication(Component, roleIndexArray, props) {
+export function requireAuthentication(Component, roleIndexArray, parametrs) {
 
     class AuthenticatedComponent extends React.Component {
 
@@ -44,7 +44,7 @@ export function requireAuthentication(Component, roleIndexArray, props) {
         userName: state.usersData.name,
         isAuthenticated: state.usersData.isAuthenticated,
         role: state.usersData.role,
-        otherProps: props
+        otherParametrs: parametrs
     });
     const mapDispatchToProps = dispatch => ({
         setBreadcrumbs: (path) => dispatch(setBreadcrumbs(path))

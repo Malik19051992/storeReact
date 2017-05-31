@@ -51,12 +51,14 @@ class Navigation extends Component {
                             <ul>
                                 <li><Link to='/arrivedGoods'>Поступление товара</Link>
                                     <ul>
-                                        <li><Link to='/createArrivedGoods/'>Добавить поступление</Link></li>
+                                        <li><Link to='/createArrivedGoodsByCategory/'>Товары категории</Link></li>
+                                        <li><Link to='/createArrivedGoods/'>Все товары</Link></li>
                                     </ul>
                                 </li>
                                 <li><Link to='/soldGoods'>Продажа товара</Link>
                                     <ul>
-                                        <li><Link to='/createSoldGoods/'>Добавить продажу</Link></li>
+                                        <li><Link to='/createSoldGoodsByCategory/'>Товары категории</Link></li>
+                                        <li><Link to='/createSoldGoods/'>Все товары</Link></li>
                                     </ul>
                                 </li>
                                 <li><Link to='/availabilityGoods'>Наличие товара</Link></li>

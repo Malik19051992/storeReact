@@ -14,6 +14,7 @@
     background-image: linear-gradient(#444, #111);
     border-radius: 6px;
     box-shadow: 0 1px 1px #777, 0 1px 0 #666 inset;
+    position: relative;
 }
 
 

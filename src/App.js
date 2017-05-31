@@ -7,7 +7,13 @@ import {Categories, CreateCategory, Category} from './containers/categories'
 import {Attributes, CreateAttribute, Attribute} from './containers/attributes'
 import {Goods, Good, CreateGood} from './containers/goods'
 import {Login, Users, CreateUser, User} from './containers/users'
-import {CreateTurnoverGoodsList, TurnoverGoods, EditTurnoverGood, AvailabilityGoods} from './containers/turnoverGoods'
+import {
+    CreateTurnoverGoodsList,
+    TurnoverGoods,
+    EditTurnoverGood,
+    AvailabilityGoods,
+    CategorisList
+} from './containers/turnoverGoods'
 import AttributesCategory from './containers/attributeCategory/attributesCategory'
 import Error from './containers/ErrorPage';
 import './resources/css/global.css'
@@ -75,23 +81,38 @@ export default class App extends Component {
 
                             <Route exact path='/createArrivedGoods/'
                                    component={requireAuthentication(CreateTurnoverGoodsList, [0, 1], {typeList: 0})}/>
+                            <Route exact path='/createArrivedGoodsByCategory/'
+                                   component={requireAuthentication(CategorisList, [0, 1], {typeList: 0})}/>
+                            <Route exact path='/createArrivedGoodsByCategory/:categoryId'
+                                   component={requireAuthentication(CreateTurnoverGoodsList, [0, 1], {typeList: 0})}/>
+
                             <Route exact path='/arrivedGoods/'
                                    component={requireAuthentication(TurnoverGoods, [0, 1], {typeList: 0})}/>
                             <Route exact path='/arrivedGoods/:turnoverGoodId'
                                    component={requireAuthentication(EditTurnoverGood, [0, 1], {typeList: 0})}/>
 
+
                             <Route exact path='/createSoldGoods/'
+                                   component={requireAuthentication(CreateTurnoverGoodsList, [0, 1], {typeList: 1})}/>
+                            <Route exact path='/createSoldGoodsByCategory/'
+                                   component={requireAuthentication(CategorisList, [0, 1], {typeList: 1})}/>
+                            <Route exact path='/createSoldGoodsByCategory/:categoryId'
                                    component={requireAuthentication(CreateTurnoverGoodsList, [0, 1], {typeList: 1})}/>
                             <Route exact path='/soldGoods/'
                                    component={requireAuthentication(TurnoverGoods, [0, 1], {typeList: 1})}/>
                             <Route exact path='/soldGoods/:turnoverGoodId'
                                    component={requireAuthentication(EditTurnoverGood, [0, 1], {typeList: 1})}/>
 
-                            <Route exact path='/availabilityGoods'
+                            <Route exact path='/availabilityGoods/'
                                    component={requireAuthentication(AvailabilityGoods, [0, 1])}/>
 
+
+
+
+
+
                             <Route exact path='/login' component={Login}/>
-                            <Route exact path='/termsOfUse/'  component={requireAuthentication(TermsOfUse, [0, 1, 2])}/>
+                            <Route exact path='/termsOfUse/' component={requireAuthentication(TermsOfUse, [0, 1, 2])}/>
                         </Switch>
                     </main>
                 </div>

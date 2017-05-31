@@ -44,7 +44,7 @@ class TurnoverGoods extends Component {
         this.props.findTurnoverGoods({
             categoryId: this.state.categoryId !== 0 ? this.state.categoryId : null,
             dateAction: this.state.dateAction,
-            typeList: this.props.otherProps.typeList
+            typeList: this.props.otherParametrs.typeList
         })
             .then(result => this.setState({searchResults: result, filteredTurnoverGoods: result}));
 
@@ -81,10 +81,10 @@ class TurnoverGoods extends Component {
                         day: 'numeric',
                     })}</td>
                     <td>{item.count}</td>
-                    {this.props.otherProps.typeList === 0 ?
+                    {this.props.otherParametrs.typeList === 0 ?
                         <td>{item.purchasePrice}</td> :
                         <td>{item.sellingPrice}</td>}
-                    {this.props.otherProps.typeList === 0 ?
+                    {this.props.otherParametrs.typeList === 0 ?
                         <td>
                             <button className="edit-button action-button"
                                     onClick={() => this.props.history.push("/arrivedGoods/" + item.id)}>

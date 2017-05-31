@@ -20,7 +20,7 @@ class EditTurnoverGood extends Component {
                     name: nextProps.turnoverGood.name,
                     dateAction: nextProps.turnoverGood.dateAction.slice(0, 10)
                 }
-                if (this.props.otherProps.typeList === 0) {
+                if (this.props.otherParametrs.typeList === 0) {
                     turnoverGood.count = nextProps.turnoverGood.count;
                     turnoverGood.purchasePrice = nextProps.turnoverGood.purchasePrice;
                 }
@@ -36,7 +36,7 @@ class EditTurnoverGood extends Component {
     saveClick = () => {
         const turnoverGood = this.state.turnoverGood;
         turnoverGood.dateAction = this.state.dateAction;
-        if (this.props.otherProps.typeList === 0) {
+        if (this.props.otherParametrs.typeList === 0) {
             turnoverGood.count = this.state.count;
             turnoverGood.purchasePrice = this.state.purchasePrice;
             turnoverGood.sellingPrice = undefined
@@ -46,7 +46,7 @@ class EditTurnoverGood extends Component {
             turnoverGood.sellingPrice = this.state.sellingPrice;
         }
         this.props.updateTurnoverGoods(turnoverGood)
-            .then(() => this.props.otherProps.typeList === 0 ? this.props.history.push(`/arrivedGoods`) : this.props.history.push(`/soldGoods`))
+            .then(() => this.props.otherParametrs.typeList === 0 ? this.props.history.push(`/arrivedGoods`) : this.props.history.push(`/soldGoods`))
             .catch(error => this.props.history.push('/error/', error))
 
 
@@ -92,7 +92,7 @@ class EditTurnoverGood extends Component {
                                    value={this.state.count}></input>
                         </td>
                     </tr>
-                    {this.props.otherProps.typeList === 0 ?
+                    {this.props.otherParametrs.typeList === 0 ?
                         <tr>
                             <td><label htmlFor="purchasePrice">Цена при поступлении</label></td>
                             <td><input id="purchasePrice" type="number" onChange={this.purchasePriceChange}

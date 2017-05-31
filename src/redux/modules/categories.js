@@ -4,10 +4,12 @@ import {
     getCategoriesData,
     addCategoryData,
     deleteCategoryData,
-    updateCategoryData
+    updateCategoryData,
+    getCategoriesForPageData
 } from '../../dataProvider'
 import {ADD_ERROR} from './errors'
 
+const CHANGE_PAGE = 'CHANGE_PAGE';
 
 const ADD_CATEGORY = 'ADD_CATEGORY';
 const ADD_CATEGORY_SUCCESS = 'ADD_CATEGORY_SUCCESS';
@@ -20,6 +22,10 @@ const UPDATE_CATEGORY_FAILURE = 'UPDATE_CATEGORY_FAILURE';
 const GET_CATEGORY = 'GET_CATEGORY';
 const GET_CATEGORY_SUCCESS = 'GET_CATEGORY_SUCCESS';
 const GET_CATEGORY_FAILURE = 'GET_CATEGORY_FAILURE';
+
+const GET_CATEGORIES_FOR_PAGE = 'GET_CATEGORIES_FOR_PAGE';
+const GET_CATEGORIES_FOR_PAGE_SUCCESS = 'GET_CATEGORIES_FOR_PAGE_SUCCESS';
+const GET_CATEGORIES_FOR_PAGE_FAILURE = 'GET_CATEGORIES_FOR_PAGE_FAILURE';
 
 const GET_CATEGORIES = 'GET_CATEGORIES';
 const GET_CATEGORIES_SUCCESS = 'GET_CATEGORIES_SUCCESS';
@@ -39,11 +45,11 @@ export function addCategory(category) {
         try {
             dispatch({type: ADD_CATEGORY})
             return addCategoryData(category).then(res => {
-                dispatch({type: ADD_CATEGORY_SUCCESS, payload: res})
+                dispatch({type: ADD_CATEGORY_SUCCESS})
                 return res;
             })
         } catch (error) {
-            dispatch({type: ADD_CATEGORY_FAILURE, payload: error})
+            dispatch({type: ADD_CATEGORY_FAILURE})
             dispatch({type: ADD_ERROR, error: error})
         }
     }
@@ -54,7 +60,7 @@ export function updateCategory(category) {
         try {
             dispatch({type: UPDATE_CATEGORY})
             return updateCategoryData(category).then(res => {
-                dispatch({type: UPDATE_CATEGORY_SUCCESS, payload: res})
+                dispatch({type: UPDATE_CATEGORY_SUCCESS})
                 return res;
             }).catch((error) => {
                 dispatch({type: UPDATE_CATEGORY})
@@ -72,7 +78,7 @@ export function deleteCategory(id) {
         try {
             dispatch({type: DELETE_CATEGORY})
             return deleteCategoryData(id).then(res => {
-                dispatch({type: DELETE_CATEGORY_SUCCESS, payload: res})
+                dispatch({type: DELETE_CATEGORY_SUCCESS})
                 return res;
             }).catch((error) => {
                 dispatch({type: DELETE_CATEGORY_FAILURE})
@@ -139,7 +145,42 @@ export function getCategoriesTree() {
     }
 }
 
-const initialState = {categoriesTree: [], categories: []}
+export function getCategoriesForPage(pageSize, pageNumber) {
+    return findByFilterValue(pageSize, pageNumber, '')
+}
+
+export function changePage(pageSize, pageNumber, filterValue) {
+    return function (dispatch) {
+        dispatch({type: CHANGE_PAGE, payload: pageNumber});
+        findByFilterValue(pageSize, pageNumber, filterValue)(dispatch);
+    }
+}
+
+export function findByFilterValue(pageSize, pageNumber, filterValue) {
+    return function (dispatch) {
+        try {
+            dispatch({type: GET_CATEGORIES_FOR_PAGE})
+            return getCategoriesForPageData(pageSize, pageNumber, filterValue).then(res => {
+                dispatch({type: GET_CATEGORIES_FOR_PAGE_SUCCESS, payload: res})
+            }).catch((error) => {
+                dispatch({type: GET_CATEGORIES_FOR_PAGE_FAILURE})
+                dispatch({type: ADD_ERROR, error: error})
+            })
+        }
+        catch (error) {
+            dispatch({type: ADD_ERROR, error: error})
+
+        }
+    }
+}
+
+export function setNumberPage(pageNumber) {
+    return function (dispatch) {
+        dispatch({type: CHANGE_PAGE, payload: pageNumber});
+    }
+}
+
+const initialState = {pageSize: 20, pageNumber: 1, countCategories: 0, categoriesTree: [], categories: []}
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
@@ -149,12 +190,10 @@ export default function reducer(state = initialState, action) {
             return {...state, categories: action.payload}
         case GET_CATEGORY_SUCCESS:
             return {...state, category: action.payload}
-        case ADD_CATEGORY_SUCCESS:
-            return {...state, ok: action.payload}
-        case DELETE_CATEGORY_SUCCESS:
-            return {...state, ok: action.payload}
-        case UPDATE_CATEGORY_SUCCESS:
-            return {...state, ok: action.payload}
+        case GET_CATEGORIES_FOR_PAGE_SUCCESS:
+            return {...state, countCategories: action.payload.count, categories: action.payload.categories}
+        case CHANGE_PAGE:
+            return {...state, pageNumber: action.payload}
         default:
             return state
     }

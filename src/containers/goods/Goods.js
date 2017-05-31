@@ -1,7 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Goods from '../../components/main/goods/Goods'
-import {getGoods, getGoodsCategory, deleteGood} from '../../redux/modules/goods'
+import {
+    deleteGood,
+    getGoodsCategoryForPage,
+    getGoodsForPage,
+    changePage,
+    setNumberPage
+} from '../../redux/modules/goods'
 
 class GoodsContainer extends Component {
 
@@ -12,30 +18,41 @@ class GoodsContainer extends Component {
             }
     }
 
+    componentWillUnmount() {
+        this.props.setNumberPage(1);
+    }
+
     componentDidMount() {
         this.fetchData();
     }
 
     fetchData() {
         if (this.props.match.params.categoryId)
-            this.props.getGoodsCategory(this.props.match.params.categoryId);
+            this.props.getGoodsCategoryForPage(this.props.match.params.categoryId, this.props.pageSize, this.props.pageNumber);
         else
-            this.props.getGoods();
+            this.props.getGoodsForPage(this.props.pageSize, this.props.pageNumber);
     }
 
     render() {
-        return <Goods {...this.props} deleteGood={this.props.deleteGood} categoryId={this.props.match.params.categoryId}/>
+        return <Goods {...this.props} deleteGood={this.props.deleteGood}
+                      categoryId={this.props.match.params.categoryId} changePage={this.props.changePage}
+                      getGoodsForPage={this.props.getGoodsForPage}/>
     }
 }
 
 const mapStateToProps = state => ({
-    goods: state.goodsData.goods
+    goods: state.goodsData.goods,
+    pageSize: state.goodsData.pageSize,
+    pageNumber: state.goodsData.pageNumber,
+    countGoods: state.goodsData.countGoods,
 })
 
 const mapDispatchToProps = dispatch => ({
-    getGoods: () => dispatch(getGoods()),
-    getGoodsCategory: (id) => dispatch(getGoodsCategory(id)),
-    deleteGood: (id) => dispatch(deleteGood(id))
+    deleteGood: (id) => dispatch(deleteGood(id)),
+    getGoodsCategoryForPage: (id, pageSize, pageNumber) => dispatch(getGoodsCategoryForPage(id, pageSize, pageNumber)),
+    getGoodsForPage: (pageSize, pageNumber) => dispatch(getGoodsForPage(pageSize, pageNumber)),
+    changePage: (categoryId, pageSize, pageNumber, filterValue) => dispatch(changePage(categoryId, pageSize, pageNumber, filterValue)),
+    setNumberPage: (numberPage) => dispatch(setNumberPage(numberPage))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GoodsContainer)
